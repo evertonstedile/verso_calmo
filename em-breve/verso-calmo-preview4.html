@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alguns respiros vão virar tela | verso calmo</title>
+  <meta name="description" content="uma coleção pequena, feita devagar em Garopaba, para quem quer levar um respiro para a tela do celular.">
+  <meta name="theme-color" content="#f8f4ed">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--espuma:#f8f4ed;--areia:#f0e8db;--ambar:#d4a574;--ambar-profundo:#b87a45;--dourado-queimado:#9a6b3a;--marrom-suave:#6b5a48;--noite:#3a3028;--texto:#3a3028;--texto-leve:#6b5a48;--texto-sutil:#806e5c;--borda:#e0d6c8;--botao-bg:#3a3028;--botao-texto:#f8f4ed}
+    html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+    body{font-family:'Manrope',sans-serif;font-weight:300;color:var(--texto);background:var(--espuma);line-height:1.7;letter-spacing:0.01em;overflow-x:hidden}
+    .hero{position:relative;width:100%;height:100vh;height:100svh;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+    .hero__atmosfera{position:absolute;inset:0;z-index:0}
+    .hero__paisagem{position:absolute;inset:0;width:100%;height:100%}
+    .hero__sol{animation:respirar 8s ease-in-out infinite;transform-origin:center}
+    .hero__morro--1{animation:flutuar-leve 12s ease-in-out infinite}
+    .hero__morro--2{animation:flutuar-leve 10s ease-in-out infinite 1s}
+    .hero__morro--3{animation:flutuar-leve 9s ease-in-out infinite 2s}
+    .hero__mar-linha--1{animation:mar-onda 7s ease-in-out infinite}
+    .hero__mar-linha--2{animation:mar-onda 9s ease-in-out infinite 1.5s}
+    .hero__mar-linha--3{animation:mar-onda 11s ease-in-out infinite 3s}
+    .hero__textura{position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");pointer-events:none}
+    .hero__neblina{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--espuma) 0%,transparent 100%);pointer-events:none}
+    .hero__conteudo{position:relative;z-index:1;text-align:center;padding:2rem}
+    .hero__marca{font-family:'Fraunces',serif;font-weight:200;font-size:1.25rem;letter-spacing:0.4em;color:rgba(58,48,40,0.8);margin-bottom:1rem;animation:aparecer-marca 2s ease-out both}
+    .hero__local{font-size:0.6875rem;letter-spacing:0.2em;color:var(--texto-sutil);text-transform:lowercase;animation:aparecer-marca 2s ease-out 0.5s both}
+    .hero__scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:1}
+    .hero__scroll-linha{display:block;width:1px;height:48px;background:linear-gradient(to bottom,transparent,var(--texto-sutil));animation:scroll-pulso 2.5s ease-in-out infinite}
+    .secao{position:relative;width:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem}
+    .secao__inner{width:100%;max-width:520px}
+    .secao--headline{padding-top:8rem;padding-bottom:4rem}
+    .headline{font-family:'Fraunces',serif;font-weight:200;font-style:italic;font-size:clamp(1.75rem,5vw,2.75rem);line-height:1.3;color:var(--texto);margin-bottom:1.25rem}
+    .subtitulo{font-size:0.9375rem;color:var(--texto-sutil);letter-spacing:0.02em}
+    .secao--texto{padding-top:2rem;padding-bottom:4rem}
+    .bilhetes{display:flex;flex-direction:column;gap:2.5rem}
+    .bilhete{font-size:0.9375rem;line-height:1.9;color:var(--texto-leve);padding-left:1.25rem;border-left:1px solid var(--borda)}
+    .secao--mockup{padding-top:4rem;padding-bottom:4rem}
+    .mockup{display:flex;flex-direction:column;align-items:center}
+    .mockup__moldura{width:200px;height:420px;border-radius:28px;padding:8px;background:linear-gradient(145deg,#e0d6c8 0%,#c8b8a4 100%);box-shadow:0 20px 60px rgba(58,48,40,0.12),0 8px 24px rgba(58,48,40,0.08),inset 0 1px 1px rgba(255,255,255,0.3)}
+    .mockup__tela{width:100%;height:100%;border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:flex-end;justify-content:center}
+    .mockup__wallpaper{position:absolute;inset:0}
+    .mockup__wallpaper svg{width:100%;height:100%}
+    .mockup__frase{position:relative;z-index:1;font-size:0.625rem;color:rgba(255,255,255,0.6);text-align:center;padding:2rem 1.5rem;letter-spacing:0.04em}
+    .mockup__legenda{margin-top:2rem;font-size:0.75rem;letter-spacing:0.15em;color:var(--texto-sutil);text-align:center}
+    .secao--formulario{padding-top:4rem;padding-bottom:6rem}
+    .convite{background:var(--areia);border:1px solid var(--borda);border-radius:2px;padding:2.5rem 2rem;box-shadow:0 2px 16px rgba(58,48,40,0.06)}
+    .convite__abertura{font-size:0.75rem;letter-spacing:0.12em;color:var(--texto-sutil);text-align:center;margin-bottom:2rem;text-transform:lowercase}
+    .formulario{width:100%}
+    .campo{margin-bottom:1.25rem}
+    .campo label{display:block;font-size:0.6875rem;letter-spacing:0.1em;color:var(--texto-sutil);margin-bottom:0.5rem;text-transform:lowercase}
+    .campo input{width:100%;padding:0.875rem 1rem;font-family:'Manrope',sans-serif;font-weight:300;font-size:0.9375rem;color:var(--texto);background:rgba(255,255,255,0.6);border:1px solid var(--borda);border-radius:6px;outline:none;transition:border-color 0.4s ease,box-shadow 0.4s ease;-webkit-appearance:none}
+    .campo input::placeholder{color:var(--texto-sutil);font-weight:300}
+    .campo input:focus{border-color:var(--ambar);box-shadow:0 0 0 3px rgba(212,165,116,0.1)}
+    .botao{width:100%;padding:1rem 2rem;margin-top:0.5rem;font-family:'Manrope',sans-serif;font-weight:400;font-size:0.8125rem;letter-spacing:0.06em;color:var(--botao-texto);background:var(--botao-bg);border:none;border-radius:6px;cursor:pointer;transition:transform 0.3s ease,opacity 0.3s ease;-webkit-appearance:none}
+    .botao:active{transform:scale(0.98)}
+    .microcopy{font-size:0.75rem;color:var(--texto-sutil);margin-top:1.5rem;text-align:center;font-style:italic;font-family:'Fraunces',serif;font-weight:200}
+    .convite__sucesso{display:none;text-align:center;line-height:1.9;font-size:0.9375rem;color:var(--texto-leve)}
+    .convite__sucesso p{margin-bottom:1rem}
+    .convite__assinatura{margin-top:1.5rem;font-style:italic;font-family:'Fraunces',serif;font-weight:200;font-size:1rem;color:var(--texto-sutil)}
+    .rodape{text-align:center;padding:3rem 1.5rem 2.5rem;border-top:1px solid var(--borda)}
+    .rodape__marca{display:block;font-family:'Fraunces',serif;font-weight:200;font-size:0.75rem;letter-spacing:0.35em;color:var(--texto-sutil);margin-bottom:0.75rem}
+    .rodape__info{font-size:0.6875rem;color:var(--texto-sutil);letter-spacing:0.04em}
+    .revelar{opacity:1;transform:none;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+    .js-ativo .revelar{opacity:0;transform:translateY(24px)}
+    .revelar--visivel{opacity:1;transform:translateY(0)}
+    @keyframes respirar{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.7;transform:scale(1.05)}}
+    @keyframes flutuar-leve{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+    @keyframes mar-onda{0%,100%{transform:translateX(0)}50%{transform:translateX(15px)}}
+    @keyframes flutuar-celular{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @keyframes scroll-pulso{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:0.8;transform:scaleY(1)}}
+    @keyframes aparecer-marca{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes sucesso-entrada{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.hero__sol,.hero__morro--1,.hero__morro--2,.hero__morro--3,.hero__mar-linha--1,.hero__mar-linha--2,.hero__mar-linha--3,.hero__scroll-linha{animation:none}.revelar,.js-ativo .revelar{opacity:1;transform:none;transition:none}.hero__marca,.hero__local{animation:none;opacity:1}}
+    @media(max-width:767px){.hero{height:55vh;min-height:280px;max-height:420px}.secao{padding:3.5rem 1.5rem}.secao--headline{padding-top:2.5rem;padding-bottom:2rem}.secao--texto{padding-top:1rem;padding-bottom:2.5rem}.secao--mockup{padding-top:2rem;padding-bottom:2rem}.secao--formulario{padding-top:2rem;padding-bottom:3.5rem}.mockup__moldura{width:160px;height:340px;border-radius:22px;padding:6px}.mockup__tela{border-radius:16px}}
+    @media(min-width:768px){.secao{padding:8rem 2rem}.secao--headline{padding-top:10rem;padding-bottom:6rem}.secao__inner{max-width:580px}.headline{font-size:2.75rem}.bilhete{font-size:1rem;padding-left:1.75rem}.mockup__moldura{width:240px;height:500px;border-radius:32px;padding:10px}.mockup__tela{border-radius:22px}.convite{padding:3.5rem 3rem}.rodape{padding:4rem 2rem 3rem}}
+    @media(min-width:1024px){.secao--headline .secao__inner{max-width:650px}.secao--texto .secao__inner{max-width:560px}.secao--mockup .secao__inner{display:flex;flex-direction:column;align-items:center}.secao--formulario .secao__inner{max-width:480px}.headline{font-size:3rem}}
+  </style>
+</head>
+<body>
+
+  <section class="hero" aria-label="Verso Calmo">
+    <div class="hero__atmosfera">
+      <svg class="hero__paisagem" viewBox="0 0 1440 900" preserveAspectRatio="xMidYEnd slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ceu" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#e8d5b8"/>
+            <stop offset="35%" stop-color="#d4a574"/>
+            <stop offset="60%" stop-color="#c4956a"/>
+            <stop offset="85%" stop-color="#b8a080"/>
+            <stop offset="100%" stop-color="#a8937a"/>
+          </linearGradient>
+          <radialGradient id="sol-radial" cx="50%" cy="45%" r="25%">
+            <stop offset="0%" stop-color="#fff5e0" stop-opacity="0.6"/>
+            <stop offset="50%" stop-color="#f0d9a8" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#d4a574" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="morro1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#8a7560"/>
+            <stop offset="100%" stop-color="#6b5a48"/>
+          </linearGradient>
+          <linearGradient id="morro2" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#9a8570"/>
+            <stop offset="100%" stop-color="#7a6855"/>
+          </linearGradient>
+          <linearGradient id="morro3" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#a89580"/>
+            <stop offset="100%" stop-color="#8a7865"/>
+          </linearGradient>
+          <linearGradient id="mar-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#9aaa9a" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#7a9a8a" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#ceu)"/>
+        <circle class="hero__sol" cx="720" cy="380" r="280" fill="url(#sol-radial)"/>
+        <path class="hero__morro hero__morro--1" d="M0 620 Q200 520 400 580 Q600 500 800 560 Q1000 490 1200 550 Q1350 520 1440 560 L1440 900 L0 900Z" fill="url(#morro1)" opacity="0.3"/>
+        <path class="hero__morro hero__morro--2" d="M0 680 Q180 600 350 650 Q550 580 720 640 Q900 570 1100 630 Q1300 590 1440 640 L1440 900 L0 900Z" fill="url(#morro2)" opacity="0.4"/>
+        <path class="hero__morro hero__morro--3" d="M0 740 Q150 680 320 720 Q500 660 700 710 Q880 670 1050 700 Q1250 680 1440 720 L1440 900 L0 900Z" fill="url(#morro3)" opacity="0.5"/>
+        <rect y="760" width="1440" height="140" fill="url(#mar-grad)"/>
+        <path class="hero__mar-linha hero__mar-linha--1" d="M-100 800 Q200 790 500 800 Q800 810 1100 800 Q1300 790 1540 800" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none"/>
+        <path class="hero__mar-linha hero__mar-linha--2" d="M-50 830 Q250 820 550 830 Q850 840 1150 830 Q1350 820 1490 830" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" fill="none"/>
+        <path class="hero__mar-linha hero__mar-linha--3" d="M-80 860 Q220 850 520 860 Q820 870 1120 860 Q1320 850 1520 860" stroke="rgba(255,255,255,0.08)" stroke-width="0.6" fill="none"/>
+      </svg>
+      <div class="hero__textura" aria-hidden="true"></div>
+      <div class="hero__neblina" aria-hidden="true"></div>
+    </div>
+    <div class="hero__conteudo">
+      <div class="hero__marca" aria-label="Verso Calmo">V&ensp;|&ensp;C</div>
+      <p class="hero__local">garopaba / sc</p>
+    </div>
+    <div class="hero__scroll-hint" aria-hidden="true">
+      <span class="hero__scroll-linha"></span>
+    </div>
+  </section>
+
+  <section class="secao secao--headline">
+    <div class="secao__inner">
+      <h1 class="headline revelar" data-delay="0">alguns respiros vão virar tela.</h1>
+      <p class="subtitulo revelar" data-delay="200">uma coleção pequena, feita devagar, em Garopaba.</p>
+    </div>
+  </section>
+
+  <section class="secao secao--texto">
+    <div class="secao__inner">
+      <div class="bilhetes">
+        <p class="bilhete revelar" data-delay="0">aqui dentro, um respiro mora em silêncio.</p>
+        <p class="bilhete revelar" data-delay="150">venho preparando algo pra quem olha pro celular cem vezes por dia — e queria que esse olhar fizesse bem.</p>
+        <p class="bilhete revelar" data-delay="300">se isso é pra você, deixo um lugar aberto.<br>quando chegar a hora, te aviso por aqui.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--mockup">
+    <div class="secao__inner">
+      <div class="mockup revelar" data-delay="0">
+        <div class="mockup__moldura">
+          <div class="mockup__tela">
+            <div class="mockup__wallpaper">
+              <svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="wp-ceu" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#dcc8a8"/>
+                    <stop offset="40%" stop-color="#c4956a"/>
+                    <stop offset="70%" stop-color="#a8937a"/>
+                    <stop offset="100%" stop-color="#6b5a48"/>
+                  </linearGradient>
+                  <radialGradient id="wp-sol" cx="50%" cy="35%" r="30%">
+                    <stop offset="0%" stop-color="#fff5e0" stop-opacity="0.5"/>
+                    <stop offset="100%" stop-color="#d4a574" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <rect width="390" height="844" fill="url(#wp-ceu)"/>
+                <circle cx="195" cy="300" r="140" fill="url(#wp-sol)"/>
+                <path d="M0 550 Q100 500 195 530 Q290 500 390 550 L390 844 L0 844Z" fill="#6b5a48" opacity="0.5"/>
+                <path d="M0 620 Q100 580 195 600 Q290 580 390 620 L390 844 L0 844Z" fill="#5a4a3a" opacity="0.6"/>
+              </svg>
+            </div>
+            <p class="mockup__frase">um respiro para a tela que você olha todos os dias</p>
+          </div>
+        </div>
+      </div>
+      <p class="mockup__legenda revelar" data-delay="200">feito devagar</p>
+    </div>
+  </section>
+
+  <section class="secao secao--formulario">
+    <div class="secao__inner">
+      <div class="convite revelar" data-delay="0">
+        <div id="area-formulario" class="convite__corpo">
+          <p class="convite__abertura">um aviso quando chegar</p>
+          <form id="form-em-breve" class="formulario" autocomplete="off" novalidate>
+            <div class="campo">
+              <label for="nome">nome</label>
+              <input type="text" id="nome" name="nome" placeholder="como posso te chamar" required>
+            </div>
+            <div class="campo">
+              <label for="email">email</label>
+              <input type="email" id="email" name="email" placeholder="onde posso te encontrar" required>
+            </div>
+            <button type="submit" class="botao">guardar meu lugar</button>
+          </form>
+          <p class="microcopy">com calma. quando chegar, eu te aviso.</p>
+        </div>
+        <div id="mensagem-sucesso" class="convite__sucesso">
+          <p>recebi seu nome.</p>
+          <p>agora é só esperar o tempo certo.<br>quando chegar, te aviso por aqui.</p>
+          <p class="convite__assinatura">com calma,<br>Marina</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <span class="rodape__marca">V&ensp;|&ensp;C</span>
+    <p class="rodape__info">verso calmo &ensp;•&ensp; por Marina Gomes &ensp;•&ensp; Garopaba/SC</p>
+  </footer>
+
+  <script>
+    (function(){'use strict';document.documentElement.classList.add('js-ativo');var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;function initReveal(){var elementos=document.querySelectorAll('.revelar');if(prefersReducedMotion){elementos.forEach(function(el){el.classList.add('revelar--visivel')});return}if(!('IntersectionObserver' in window)){elementos.forEach(function(el){el.classList.add('revelar--visivel')});return}var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){var delay=parseInt(entry.target.getAttribute('data-delay')||'0',10);setTimeout(function(){entry.target.classList.add('revelar--visivel')},delay);observer.unobserve(entry.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});elementos.forEach(function(el){observer.observe(el)})}function initParallax(){if(prefersReducedMotion)return;var hero=document.querySelector('.hero');var sol=document.querySelector('.hero__sol');var morros=document.querySelectorAll('.hero__morro');var neblina=document.querySelector('.hero__neblina');var ticking=false;function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){var scrollY=window.pageYOffset;var heroHeight=hero.offsetHeight;if(scrollY<heroHeight*1.5){var progresso=scrollY/heroHeight;if(sol){sol.style.transform='scale('+(1+progresso*0.1)+') translateY('+(progresso*-20)+'px)';sol.style.opacity=1-progresso*0.5}morros.forEach(function(morro,i){var velocidade=(i+1)*8;morro.style.transform='translateY('+(progresso*velocidade)+'px)'});if(neblina){neblina.style.opacity=Math.min(1,progresso*1.5+0.3)}}ticking=false})}window.addEventListener('scroll',onScroll,{passive:true})}function initScrollHint(){var hint=document.querySelector('.hero__scroll-hint');if(!hint)return;var hidden=false;function checkScroll(){if(hidden)return;if(window.pageYOffset>80){hint.style.opacity='0';hint.style.transition='opacity 0.6s ease';hidden=true}}window.addEventListener('scroll',checkScroll,{passive:true})}function initFormulario(){var form=document.getElementById('form-em-breve');var formArea=document.getElementById('area-formulario');var sucesso=document.getElementById('mensagem-sucesso');if(!form||!formArea||!sucesso)return;form.addEventListener('submit',function(e){e.preventDefault();var nome=form.querySelector('[name="nome"]').value.trim();var email=form.querySelector('[name="email"]').value.trim();if(!nome||!email)return;formArea.style.display='none';sucesso.style.display='block';if(!prefersReducedMotion){sucesso.style.animation='sucesso-entrada 0.8s cubic-bezier(0.16,1,0.3,1) both'}})}document.addEventListener('DOMContentLoaded',function(){initReveal();initParallax();initScrollHint();initFormulario()})})();
+  </script>
+</body>
+</html>
