@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respiro de Garopaba | Verso Calmo</title>
+  <meta name="description" content="Uma coleção com 5 wallpapers autorais de Garopaba para transformar a tela do celular em um pequeno lembrete de pausa.">
+  <meta name="theme-color" content="#F6EFE5">
+
+  <!-- Open Graph -->
+  <!-- Substituir og:image pelo arquivo final da coleção antes de publicar -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Respiro de Garopaba | Verso Calmo">
+  <meta property="og:description" content="Uma coleção com 5 wallpapers autorais de Garopaba para transformar a tela do celular em um pequeno lembrete de pausa.">
+  <meta property="og:locale" content="pt_BR">
+  <!-- <meta property="og:image" content="https://seudominio.com.br/assets/og/respiro-de-garopaba.jpg"> -->
+  <!-- <meta property="og:url" content="https://seudominio.com.br/respiro-de-garopaba"> -->
+
+  <!-- Pixel / Analytics: inserir aqui quando definido -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET + TOKENS
+       ============================================================ */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+    :root{
+      /* Modo Respiro — paleta principal */
+      --vc-sal:#F6EFE5;
+      --vc-areia-clara:#E8D9C2;
+      --vc-areia-umida:#C8A77D;
+      --vc-ambar-suave:#D8915A;
+      --vc-ceu-quieto:#AFC7C9;
+      --vc-tinta-mar:#3A4A55;
+      --vc-tinta-mar-suave:#5a6770;
+      --vc-borda:rgba(58,74,85,0.12);
+      /* Modo Profundidade — rodapé e contraste */
+      --vc-noite-mar:#101417;
+      --vc-mar-profundo:#1F3A3D;
+    }
+
+    html{
+      font-size:16px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+    }
+    body{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      color:var(--vc-tinta-mar);
+      background:var(--vc-sal);
+      line-height:1.6;
+      letter-spacing:0.005em;
+      overflow-x:hidden;
+    }
+
+    /* Utilitário: visually hidden para labels e textos de acessibilidade */
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero{
+      position:relative;
+      width:100%;
+      height:100vh;
+      height:100svh;
+      min-height:580px;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .hero__img{
+      position:absolute;
+      inset:0;
+      width:100%;height:100%;
+      object-fit:cover;
+      object-position:center 40%;
+      z-index:0;
+    }
+    /* Placeholder visual para caso a foto ainda não exista no deploy */
+    .hero__img-placeholder{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      background:linear-gradient(
+        160deg,
+        #C8A77D 0%,
+        #D8915A 35%,
+        #3A4A55 100%
+      );
+    }
+    .hero__gradient{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      background:linear-gradient(
+        to top,
+        rgba(16,20,23,0.65) 0%,
+        rgba(16,20,23,0.35) 40%,
+        rgba(16,20,23,0.05) 70%,
+        rgba(16,20,23,0) 100%
+      );
+      pointer-events:none;
+    }
+    .hero__bloco{
+      position:absolute;
+      left:1.75rem;
+      bottom:2.5rem;
+      z-index:2;
+      display:flex;
+      align-items:flex-start;
+      gap:1.25rem;
+      max-width:min(90%, 560px);
+    }
+    .hero__traco{
+      flex-shrink:0;
+      width:1px;
+      align-self:stretch;
+      background:rgba(246,239,229,0.5);
+      margin-top:0.35rem;
+    }
+    .hero__texto{
+      display:flex;
+      flex-direction:column;
+      gap:1.25rem;
+    }
+    .hero__headline{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(2.25rem,9vw,3.75rem);
+      line-height:1.05;
+      color:var(--vc-sal);
+      letter-spacing:-0.005em;
+    }
+    .hero__headline em{
+      font-style:italic;
+      font-weight:300;
+    }
+    .hero__sub{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:clamp(0.875rem,2.6vw,1rem);
+      line-height:1.5;
+      color:rgba(246,239,229,0.82);
+      letter-spacing:0.01em;
+      max-width:28ch;
+    }
+    .hero__cta-area{
+      display:flex;
+      flex-direction:column;
+      gap:0.75rem;
+    }
+    .btn{
+      display:inline-block;
+      padding:0.9rem 1.5rem;
+      font-family:'Manrope',sans-serif;
+      font-weight:500;
+      font-size:0.9375rem;
+      letter-spacing:0.02em;
+      color:var(--vc-sal);
+      background:var(--vc-tinta-mar);
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      text-decoration:none;
+      transition:background 0.3s ease, transform 0.2s ease;
+      -webkit-appearance:none;
+      white-space:nowrap;
+      align-self:flex-start;
+    }
+    .btn:hover{background:#2d3a44}
+    .btn:active{transform:scale(0.99)}
+    .btn--claro{
+      background:rgba(246,239,229,0.15);
+      border:1px solid rgba(246,239,229,0.45);
+      backdrop-filter:blur(4px);
+    }
+    .btn--claro:hover{background:rgba(246,239,229,0.25)}
+    .microcopy{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:0.75rem;
+      letter-spacing:0.03em;
+      color:rgba(246,239,229,0.6);
+      line-height:1.5;
+    }
+    .microcopy--escuro{
+      color:var(--vc-tinta-mar-suave);
+    }
+
+    /* ============================================================
+       EMOCIONAL
+       ============================================================ */
+    .emocional{
+      width:100%;
+      background:var(--vc-sal);
+      padding:5.5rem 1.75rem;
+      position:relative;
+    }
+    /* Textura de fundo sutil — mesmo padrão da página em-breve */
+    .emocional::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .emocional__inner{
+      position:relative;
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      align-items:flex-start;
+      gap:1.5rem;
+    }
+    .emocional__traco{
+      flex-shrink:0;
+      width:1px;
+      align-self:stretch;
+      background:rgba(58,74,85,0.2);
+      margin-top:0.35rem;
+    }
+    .emocional__texto{
+      display:flex;
+      flex-direction:column;
+      gap:1.375rem;
+    }
+    .emocional__texto p{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:clamp(1rem,2.4vw,1.125rem);
+      line-height:1.75;
+      color:var(--vc-tinta-mar);
+    }
+
+    /* ============================================================
+       PREVIEW (galeria de wallpapers)
+       ============================================================ */
+    .preview{
+      width:100%;
+      background:var(--vc-areia-clara);
+      padding:5rem 0 5.5rem;
+      overflow:hidden;
+    }
+    .preview__header{
+      padding:0 1.75rem 2.5rem;
+      max-width:520px;
+      margin:0 auto;
+    }
+    .preview__label{
+      font-family:'Manrope',sans-serif;
+      font-weight:500;
+      font-size:0.75rem;
+      letter-spacing:0.14em;
+      color:var(--vc-tinta-mar-suave);
+      text-transform:lowercase;
+      display:block;
+      margin-bottom:0.75rem;
+    }
+    .preview__titulo{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(1.625rem,5vw,2.25rem);
+      line-height:1.15;
+      color:var(--vc-tinta-mar);
+      letter-spacing:-0.005em;
+    }
+    .preview__titulo em{
+      font-style:italic;
+    }
+    /* Scroll horizontal no mobile; grid no desktop */
+    .preview__galeria{
+      display:flex;
+      gap:1rem;
+      padding:0 1.75rem;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      /* Garante espaço à direita no scroll */
+      padding-right:2.5rem;
+    }
+    .preview__galeria::-webkit-scrollbar{display:none}
+    .preview__card{
+      flex-shrink:0;
+      width:clamp(140px,38vw,180px);
+      aspect-ratio:9/16;
+      border-radius:6px;
+      overflow:hidden;
+      position:relative;
+      /* Sombra editorial sutil */
+      box-shadow:0 4px 24px rgba(58,74,85,0.12);
+    }
+    /* Substituir cada .preview__card img ou background pela imagem real do wallpaper */
+    .preview__card--1{background:linear-gradient(175deg,#E8D9C2 0%,#D8915A 55%,#C8A77D 100%)}
+    .preview__card--2{background:linear-gradient(175deg,#AFC7C9 0%,#F6EFE5 50%,#E8D9C2 100%)}
+    .preview__card--3{background:linear-gradient(175deg,#3A4A55 0%,#1F3A3D 60%,#101417 100%)}
+    .preview__card--4{background:linear-gradient(175deg,#C8A77D 0%,#D8915A 45%,#3A2A22 100%)}
+    .preview__card--5{background:linear-gradient(175deg,#F6EFE5 0%,#AFC7C9 55%,#C8A77D 100%)}
+    .preview__card img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    /* Número discreto do wallpaper no placeholder */
+    .preview__card-num{
+      position:absolute;
+      bottom:1rem;left:50%;
+      transform:translateX(-50%);
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-style:italic;
+      font-size:0.875rem;
+      color:rgba(246,239,229,0.6);
+      pointer-events:none;
+    }
+    .preview__card--2 .preview__card-num,
+    .preview__card--5 .preview__card-num{
+      color:rgba(58,74,85,0.4);
+    }
+    .preview__rodape{
+      padding:2rem 1.75rem 0;
+      max-width:520px;
+      margin:0 auto;
+    }
+    .preview__rodape p{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-style:italic;
+      font-size:clamp(0.9375rem,2.6vw,1.0625rem);
+      color:var(--vc-tinta-mar-suave);
+      line-height:1.5;
+    }
+
+    /* ============================================================
+       CONTEÚDO (o que você recebe)
+       ============================================================ */
+    .conteudo{
+      width:100%;
+      background:var(--vc-sal);
+      padding:5.5rem 1.75rem;
+      position:relative;
+    }
+    .conteudo::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .conteudo__inner{
+      position:relative;
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:2.5rem;
+    }
+    .conteudo__label{
+      font-family:'Manrope',sans-serif;
+      font-weight:500;
+      font-size:0.75rem;
+      letter-spacing:0.14em;
+      color:var(--vc-tinta-mar-suave);
+      text-transform:lowercase;
+    }
+    .conteudo__titulo{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(1.625rem,5vw,2.25rem);
+      line-height:1.15;
+      color:var(--vc-tinta-mar);
+      letter-spacing:-0.005em;
+      margin-top:-1.25rem;
+    }
+    .conteudo__lista{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:1.125rem;
+    }
+    .conteudo__lista li{
+      display:flex;
+      align-items:baseline;
+      gap:1rem;
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:clamp(0.9375rem,2.4vw,1.0625rem);
+      line-height:1.6;
+      color:var(--vc-tinta-mar);
+    }
+    .conteudo__lista li::before{
+      content:"—";
+      flex-shrink:0;
+      color:var(--vc-areia-umida);
+      font-family:'Fraunces',serif;
+      font-weight:300;
+    }
+    .conteudo__entrega{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:0.875rem;
+      color:var(--vc-tinta-mar-suave);
+      letter-spacing:0.01em;
+      line-height:1.6;
+      border-top:1px solid var(--vc-borda);
+      padding-top:1.5rem;
+    }
+
+    /* ============================================================
+       ORIGEM
+       ============================================================ */
+    .origem{
+      width:100%;
+      background:var(--vc-areia-clara);
+      padding:5.5rem 1.75rem;
+    }
+    .origem__inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:3rem;
+      align-items:center;
+    }
+    .origem__texto{
+      display:flex;
+      flex-direction:column;
+      gap:1.375rem;
+      max-width:46ch;
+    }
+    .origem__texto p{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:clamp(1rem,2.4vw,1.125rem);
+      line-height:1.8;
+      color:var(--vc-tinta-mar);
+    }
+    .origem__imagem{
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+    .origem__foto{
+      width:100%;
+      max-width:380px;
+      aspect-ratio:3/4;
+      border-radius:6px;
+      object-fit:cover;
+      display:block;
+    }
+    /* Placeholder para a foto da Marina / editorial de Garopaba */
+    .origem__foto-placeholder{
+      width:100%;
+      max-width:380px;
+      aspect-ratio:3/4;
+      border-radius:6px;
+      background:linear-gradient(160deg,#C8A77D 0%,#D8915A 50%,#3A4A55 100%);
+      display:flex;
+      align-items:flex-end;
+      padding:1.5rem;
+      /* Substituir por <img> com a foto da Marina ou editorial de Garopaba */
+    }
+
+    /* ============================================================
+       PREÇO
+       ============================================================ */
+    .preco{
+      width:100%;
+      background:var(--vc-sal);
+      padding:6rem 1.75rem 5.5rem;
+      position:relative;
+    }
+    .preco::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .preco__inner{
+      position:relative;
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:2.25rem;
+    }
+    .preco__bloco{
+      display:flex;
+      align-items:flex-start;
+      gap:1.25rem;
+    }
+    .preco__traco{
+      flex-shrink:0;
+      width:1px;
+      align-self:stretch;
+      background:rgba(58,74,85,0.2);
+      margin-top:0.4rem;
+    }
+    .preco__valor{
+      display:flex;
+      align-items:baseline;
+      gap:0.25rem;
+      line-height:1;
+    }
+    .preco__cifra{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:1.0625rem;
+      color:var(--vc-tinta-mar-suave);
+      letter-spacing:0.01em;
+    }
+    .preco__numero{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(3.5rem,12vw,5rem);
+      color:var(--vc-tinta-mar);
+      letter-spacing:-0.02em;
+    }
+    .preco__cta-area{
+      display:flex;
+      flex-direction:column;
+      gap:0.875rem;
+    }
+    .btn--compra{
+      padding:1rem 1.75rem;
+      font-size:1rem;
+      letter-spacing:0.025em;
+    }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    .faq{
+      width:100%;
+      background:var(--vc-areia-clara);
+      padding:5.5rem 1.75rem;
+    }
+    .faq__inner{
+      max-width:580px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:2.5rem;
+    }
+    .faq__titulo{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(1.375rem,4vw,1.875rem);
+      color:var(--vc-tinta-mar);
+      letter-spacing:-0.005em;
+    }
+    .faq__lista{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      border-top:1px solid rgba(58,74,85,0.15);
+    }
+    .faq__item{
+      border-bottom:1px solid rgba(58,74,85,0.15);
+    }
+    .faq__pergunta{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:1.25rem 0;
+      font-family:'Manrope',sans-serif;
+      font-weight:500;
+      font-size:clamp(0.9375rem,2.4vw,1rem);
+      color:var(--vc-tinta-mar);
+      background:none;
+      border:none;
+      cursor:pointer;
+      text-align:left;
+      line-height:1.4;
+      -webkit-appearance:none;
+      list-style:none;
+    }
+    /* Remove seta padrão do <summary> em diferentes browsers */
+    .faq__pergunta::-webkit-details-marker{display:none}
+    .faq__pergunta::marker{display:none}
+    .faq__icone{
+      flex-shrink:0;
+      width:20px;height:20px;
+      position:relative;
+      color:var(--vc-areia-umida);
+    }
+    .faq__icone::before,
+    .faq__icone::after{
+      content:"";
+      position:absolute;
+      background:currentColor;
+      border-radius:1px;
+      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+    }
+    .faq__icone::before{width:12px;height:1px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .faq__icone::after{width:1px;height:12px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    details[open] .faq__icone::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+    .faq__resposta{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:0.9375rem;
+      line-height:1.7;
+      color:var(--vc-tinta-mar-suave);
+      padding-bottom:1.375rem;
+      max-width:52ch;
+    }
+    .faq__resposta a{
+      color:var(--vc-ambar-suave);
+      text-decoration:none;
+    }
+    .faq__resposta a:hover{text-decoration:underline}
+
+    /* ============================================================
+       FECHAMENTO
+       ============================================================ */
+    .fechamento{
+      width:100%;
+      background:var(--vc-sal);
+      padding:5.5rem 1.75rem 5rem;
+      text-align:center;
+      position:relative;
+    }
+    .fechamento::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .fechamento__inner{
+      position:relative;
+      max-width:36ch;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:2rem;
+    }
+    .fechamento__frase{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:clamp(1.25rem,4vw,1.625rem);
+      line-height:1.4;
+      color:var(--vc-tinta-mar);
+      letter-spacing:-0.005em;
+    }
+    .fechamento__gesto{
+      font-size:1.375rem;
+      line-height:1;
+      opacity:0.5;
+      /* Pomba em unicode — acessível sem emoji visual pesado */
+    }
+
+    /* ============================================================
+       RODAPÉ
+       ============================================================ */
+    .rodape{
+      width:100%;
+      background:var(--vc-noite-mar);
+      padding:3rem 1.75rem 2.5rem;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0.75rem;
+    }
+    .rodape__marca{
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:0.8125rem;
+      letter-spacing:0.22em;
+      color:rgba(246,239,229,0.6);
+      text-transform:lowercase;
+    }
+    .rodape__local{
+      font-family:'Manrope',sans-serif;
+      font-weight:400;
+      font-size:0.6875rem;
+      letter-spacing:0.08em;
+      color:rgba(246,239,229,0.3);
+      text-transform:lowercase;
+    }
+
+    /* ============================================================
+       REVEAL — animação de entrada (mesmo padrão da página em-breve)
+       ============================================================ */
+    .reveal{opacity:1;transform:none;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+    .js-on .reveal{opacity:0;transform:translateY(14px)}
+    .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .reveal,.js-on .reveal{opacity:1;transform:none;transition:none}
+      .faq__icone::before,.faq__icone::after{transition:none}
+    }
+
+    /* ============================================================
+       RESPONSIVO
+       ============================================================ */
+    @media(max-width:640px){
+      .hero{min-height:560px}
+      .hero__bloco{left:1.25rem;right:1.25rem;bottom:1.75rem;max-width:none}
+      .emocional{padding:4rem 1.5rem}
+      .preview{padding:4rem 0 4.5rem}
+      .preview__header{padding:0 1.5rem 2rem}
+      .preview__galeria{padding:0 1.5rem;padding-right:2rem}
+      .preview__rodape{padding:1.75rem 1.5rem 0}
+      .conteudo{padding:4rem 1.5rem}
+      .origem{padding:4rem 1.5rem}
+      .preco{padding:4.5rem 1.5rem 4rem}
+      .faq{padding:4rem 1.5rem}
+      .fechamento{padding:4rem 1.5rem 3.5rem}
+      .rodape{padding:2.5rem 1.5rem 2rem}
+    }
+
+    @media(min-width:768px){
+      .hero__bloco{left:3rem;bottom:3.25rem;gap:1.5rem}
+      .emocional{padding:7rem 2.5rem}
+      .preview{padding:6rem 0 6.5rem}
+      .preview__header{padding:0 2.5rem 3rem;max-width:none}
+      .preview__galeria{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:1rem;
+        padding:0 2.5rem;
+        overflow:visible;
+      }
+      .preview__card{width:100%;flex-shrink:unset}
+      .preview__rodape{padding:2.25rem 2.5rem 0;max-width:none}
+      .conteudo{padding:7rem 2.5rem}
+      .origem{padding:7rem 2.5rem}
+      .origem__inner{
+        grid-template-columns:1fr 1fr;
+        gap:5rem;
+      }
+      .preco{padding:7.5rem 2.5rem 6.5rem}
+      .faq{padding:7rem 2.5rem}
+      .fechamento{padding:7rem 2.5rem 6rem}
+      .rodape{padding:4rem 2rem 3rem}
+    }
+
+    @media(min-width:1024px){
+      .hero__bloco{left:4.5rem;bottom:4rem}
+      .origem__inner{gap:6rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HERO — visível sem scroll no mobile
+       ============================================================ -->
+  <section class="hero" aria-labelledby="hero-titulo">
+
+    <!-- Substituir src pela foto principal da coleção (paisagem de Garopaba, formato landscape ou retrato) -->
+    <img
+      class="hero__img"
+      src="../assets/garopaba/01-hero-garopaba.jpg"
+      alt="paisagem de Garopaba ao fim da tarde — luz dourada sobre o mar"
+      fetchpriority="high"
+      decoding="async"
+    >
+    <!-- Se a foto acima não estiver disponível no deploy, o placeholder abaixo assume visualmente -->
+    <!-- <div class="hero__img-placeholder" aria-hidden="true"></div> -->
+
+    <div class="hero__gradient" aria-hidden="true"></div>
+
+    <div class="hero__bloco">
+      <span class="hero__traco" aria-hidden="true"></span>
+      <div class="hero__texto">
+        <h1 class="hero__headline" id="hero-titulo">
+          Respiro de<br>
+          <em>Garopaba.</em>
+        </h1>
+        <p class="hero__sub">
+          uma coleção com 5 wallpapers autorais<br>
+          de Garopaba para a tela do seu celular
+        </p>
+        <div class="hero__cta-area">
+          <!-- data-checkout: preenchido automaticamente pelo script abaixo -->
+          <a href="#checkout-pendente" class="btn btn--claro" data-checkout aria-label="levar para a minha tela — abre o checkout">
+            levar para a minha tela
+          </a>
+          <p class="microcopy">
+            pagamento seguro&nbsp;·&nbsp;entrega imediata&nbsp;·&nbsp;feito em Garopaba
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EMOCIONAL
+       ============================================================ -->
+  <section class="emocional" aria-label="por que esse produto existe">
+    <div class="emocional__inner reveal">
+      <span class="emocional__traco" aria-hidden="true"></span>
+      <div class="emocional__texto">
+        <p>
+          A gente olha para o celular dezenas de vezes por dia.<br>
+          Na maioria delas, não percebe o que vê.
+        </p>
+        <p>
+          O Respiro de Garopaba nasceu de uma vontade simples:
+          que pelo menos uma dessas vezes, a tela te lembre de parar um segundo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PREVIEW — galeria de wallpapers
+       ============================================================ -->
+  <section class="preview" aria-label="prévia da coleção">
+    <div class="preview__header reveal">
+      <span class="preview__label" aria-hidden="true">a coleção</span>
+      <h2 class="preview__titulo">
+        cinco paisagens<br>
+        para lembrar de <em>respirar</em><br>
+        no meio do dia.
+      </h2>
+    </div>
+
+    <div class="preview__galeria" role="list" aria-label="prévia dos 5 wallpapers da coleção">
+
+      <!-- Substituir cada .preview__card pelo <img> do wallpaper final -->
+      <!-- Wallpaper 1 — substituir pelo arquivo real: assets/wallpapers/wallpaper-01.jpg -->
+      <div class="preview__card preview__card--1 reveal" role="listitem" aria-label="wallpaper 1 de 5">
+        <span class="preview__card-num" aria-hidden="true">01</span>
+      </div>
+
+      <!-- Wallpaper 2 — substituir pelo arquivo real: assets/wallpapers/wallpaper-02.jpg -->
+      <div class="preview__card preview__card--2 reveal" role="listitem" aria-label="wallpaper 2 de 5">
+        <span class="preview__card-num" aria-hidden="true">02</span>
+      </div>
+
+      <!-- Wallpaper 3 — substituir pelo arquivo real: assets/wallpapers/wallpaper-03.jpg -->
+      <div class="preview__card preview__card--3 reveal" role="listitem" aria-label="wallpaper 3 de 5">
+        <span class="preview__card-num" aria-hidden="true">03</span>
+      </div>
+
+      <!-- Wallpaper 4 — substituir pelo arquivo real: assets/wallpapers/wallpaper-04.jpg -->
+      <div class="preview__card preview__card--4 reveal" role="listitem" aria-label="wallpaper 4 de 5">
+        <span class="preview__card-num" aria-hidden="true">04</span>
+      </div>
+
+      <!-- Wallpaper 5 — substituir pelo arquivo real: assets/wallpapers/wallpaper-05.jpg -->
+      <div class="preview__card preview__card--5 reveal" role="listitem" aria-label="wallpaper 5 de 5">
+        <span class="preview__card-num" aria-hidden="true">05</span>
+      </div>
+
+    </div>
+
+    <div class="preview__rodape reveal">
+      <p>cinco paisagens para lembrar de respirar no meio do dia.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONTEÚDO — o que você recebe
+       ============================================================ -->
+  <section class="conteudo" aria-labelledby="conteudo-titulo">
+    <div class="conteudo__inner">
+      <div class="reveal">
+        <p class="conteudo__label" aria-hidden="true">o que vem</p>
+        <h2 class="conteudo__titulo" id="conteudo-titulo">o que você recebe</h2>
+      </div>
+      <ul class="conteudo__lista reveal" aria-label="itens da coleção">
+        <li>5 wallpapers autorais em alta resolução</li>
+        <li>formato vertical — feito para celular</li>
+        <li>paleta natural, para descansar os olhos</li>
+        <li>sem frase. só paisagem. só respiro.</li>
+      </ul>
+      <p class="conteudo__entrega reveal">
+        Entrega imediata após o pagamento.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       ORIGEM — sobre Marina e Garopaba
+       ============================================================ -->
+  <section class="origem" aria-labelledby="origem-titulo">
+    <div class="origem__inner">
+      <div class="origem__texto reveal">
+        <h2 class="sr-only" id="origem-titulo">a origem</h2>
+        <p>
+          O verso calmo nasceu do olhar da Marina para o ritmo de Garopaba — o mar, a luz, as pausas e os dias mais lentos.
+        </p>
+        <p>
+          Nada aqui é genérico. Tudo nasce de registros, paisagens e pausas vividas nesse lugar.
+        </p>
+        <p>
+          O Respiro de Garopaba é a primeira vez que esse olhar chega na tela do seu celular.
+        </p>
+      </div>
+      <div class="origem__imagem reveal">
+        <!-- Substituir pelo <img> com foto da Marina ou editorial de Garopaba -->
+        <!-- Exemplo: <img class="origem__foto" src="../assets/garopaba/marina-bastidor.jpg" alt="Marina Gomes fotografando em Garopaba ao fim da tarde"> -->
+        <div class="origem__foto-placeholder" aria-label="fotografia editorial de Garopaba — substituir pela imagem final">
+          <!-- placeholder: gradiente representando mar e fim de tarde de Garopaba -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PREÇO + CTA principal
+       ============================================================ -->
+  <section class="preco" aria-label="valor e forma de levar a coleção">
+    <div class="preco__inner">
+      <div class="preco__bloco reveal">
+        <span class="preco__traco" aria-hidden="true"></span>
+        <div class="preco__valor">
+          <span class="preco__cifra" aria-hidden="true">R$</span>
+          <span class="preco__numero" aria-label="R$ 17">17</span>
+        </div>
+      </div>
+      <div class="preco__cta-area reveal">
+        <!-- data-checkout: preenchido automaticamente pelo script abaixo -->
+        <a href="#checkout-pendente" class="btn btn--compra" data-checkout aria-label="quero meu respiro — abre o checkout">
+          quero meu respiro
+        </a>
+        <p class="microcopy microcopy--escuro">
+          pagamento seguro&nbsp;·&nbsp;entrega imediata&nbsp;·&nbsp;feito em Garopaba
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="faq" aria-labelledby="faq-titulo">
+    <div class="faq__inner">
+      <h2 class="faq__titulo reveal" id="faq-titulo">perguntas</h2>
+
+      <div class="faq__lista reveal">
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            Como recebo?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Imediatamente após o pagamento, você recebe o link de download por e-mail.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            Como uso depois de baixar?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Salva as imagens na galeria do celular e define como tela de bloqueio ou tela inicial — em qualquer celular, é só isso.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            Funciona em qualquer celular?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Sim. O formato foi pensado para funcionar bem na maioria dos celulares iOS e Android.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            Posso usar as imagens em outros lugares?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Uso pessoal apenas. Não para redistribuição ou uso comercial.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            É uma assinatura?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Não. Compra única.
+          </p>
+        </details>
+
+        <details class="faq__item">
+          <summary class="faq__pergunta">
+            E se eu tiver problema para acessar?
+            <span class="faq__icone" aria-hidden="true"></span>
+          </summary>
+          <p class="faq__resposta">
+            Direct do <a href="https://instagram.com/versocalmo" rel="noopener noreferrer" target="_blank">@versocalmo</a>. Resolvo pessoalmente.
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FECHAMENTO
+       ============================================================ -->
+  <section class="fechamento" aria-label="fechamento">
+    <div class="fechamento__inner reveal">
+      <p class="fechamento__frase">
+        a tela que você olha todos os dias<br>
+        pode ser um pouco mais sua.
+      </p>
+      <span class="fechamento__gesto" aria-hidden="true">🕊️</span>
+    </div>
+  </section>
+
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <span class="rodape__marca">verso calmo</span>
+    <span class="rodape__local">garopaba, sc</span>
+  </footer>
+
+
+  <script>
+    (function(){
+      'use strict';
+
+      /* ============================================================
+         CHECKOUT URL — trocar este valor pelo link real antes de publicar.
+         Todos os botões da página lêem daqui automaticamente.
+         ============================================================ */
+      var CHECKOUT_URL = '#checkout-pendente';
+
+      /* Preenche todos os links de checkout */
+      function aplicarCheckout(){
+        if(CHECKOUT_URL === '#checkout-pendente') return; // seguro em desenvolvimento
+        var btns = document.querySelectorAll('[data-checkout]');
+        btns.forEach(function(btn){
+          btn.href = CHECKOUT_URL;
+        });
+      }
+
+      /* ============================================================
+         REVEAL — IntersectionObserver (mesmo padrão da página em-breve)
+         ============================================================ */
+      document.documentElement.classList.add('js-on');
+      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function initReveal(){
+        var els = document.querySelectorAll('.reveal');
+        if(prefersReducedMotion || !('IntersectionObserver' in window)){
+          els.forEach(function(el){el.classList.add('is-visible')});
+          return;
+        }
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },{threshold:0.12, rootMargin:'0px 0px -36px 0px'});
+        els.forEach(function(el){io.observe(el)});
+      }
+
+      document.addEventListener('DOMContentLoaded', function(){
+        aplicarCheckout();
+        initReveal();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
