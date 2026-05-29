@@ -38,7 +38,7 @@ uso pessoal apenas.
 as imagens não podem ser redistribuídas ou usadas comercialmente.
 
 se tiver qualquer problema para acessar o arquivo, me chama no direct:
-instagram.com/versocalmo
+https://www.instagram.com/versocalmo
 
 resolvo pessoalmente, com calma.
 
