@@ -18,6 +18,39 @@
 
   <!-- Pixel / Analytics: inserir aqui quando definido -->
 
+  <!--
+  ================================================================
+  MAPA DE ASSETS — onde trocar cada arquivo quando estiver pronto
+  ================================================================
+  HERO (foto de fundo):
+    atual      : ../assets/garopaba/01-hero-garopaba.jpg
+    substituir : <section class="hero"> → <img class="hero__img" src="...">
+
+  MOCKUP CELULAR (produto em uso):
+    esperado   : ../assets/wallpapers/mockup-celular-respiro.jpg
+    substituir : <div class="mockup-produto__wrapper"> → <img src="..."> (já está no lugar)
+    formato    : 9:16 ou 9:19.5, orientação retrato
+
+  WALLPAPERS (galeria de preview):
+    esperado   : ../assets/wallpapers/wallpaper-01.jpg … wallpaper-05.jpg
+    substituir : <section class="preview"> → <img> já está em cada .preview__card
+    formato    : 9:16, orientação retrato, alta resolução
+
+  FOTO ORIGEM (Marina / editorial Garopaba):
+    esperado   : ../assets/garopaba/marina-origem-respiro.jpg
+    substituir : <section class="origem"> → <img class="origem__foto" src="..."> (já está no lugar)
+    formato    : 3:4 recomendado, pode ser landscape também
+
+  OG IMAGE (para compartilhamento em redes sociais):
+    criar      : assets/og/respiro-de-garopaba.jpg (1200×630)
+    substituir : <head> → descomentar <meta property="og:image" ...>
+
+  CHECKOUT URL (link de compra):
+    substituir : <script> no fim da página → var CHECKOUT_URL = 'URL_REAL_AQUI';
+    apenas uma linha para trocar — todos os botões atualizam automaticamente
+  ================================================================
+  -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
@@ -455,25 +488,50 @@
       display:flex;
       justify-content:center;
     }
-    .origem__foto{
+    /* Wrapper mantém proporção e exibe gradiente quando a foto ainda não existe */
+    .origem__foto-wrapper{
       width:100%;
       max-width:380px;
       aspect-ratio:3/4;
       border-radius:6px;
+      overflow:hidden;
+      background:linear-gradient(160deg,#C8A77D 0%,#D8915A 50%,#3A4A55 100%);
+    }
+    /* img preenche o wrapper quando carregada; oculta-se via onerror caso ausente */
+    .origem__foto{
+      width:100%;
+      height:100%;
       object-fit:cover;
       display:block;
     }
-    /* Placeholder para a foto da Marina / editorial de Garopaba */
-    .origem__foto-placeholder{
+
+    /* ============================================================
+       MOCKUP PRODUTO — celular com wallpaper aplicado
+       ============================================================ */
+    .mockup-produto{
       width:100%;
-      max-width:380px;
-      aspect-ratio:3/4;
-      border-radius:6px;
-      background:linear-gradient(160deg,#C8A77D 0%,#D8915A 50%,#3A4A55 100%);
-      display:flex;
-      align-items:flex-end;
-      padding:1.5rem;
-      /* Substituir por <img> com a foto da Marina ou editorial de Garopaba */
+      background:var(--vc-sal);
+      padding:0 1.75rem 5.5rem;
+    }
+    .mockup-produto__inner{
+      max-width:220px;
+      margin:0 auto;
+    }
+    /* Wrapper em proporção de celular; gradiente aparece quando img está ausente */
+    .mockup-produto__wrapper{
+      width:100%;
+      aspect-ratio:9/19.5;
+      border-radius:20px;
+      overflow:hidden;
+      background:linear-gradient(175deg,#E8D9C2 0%,#D8915A 42%,#3A4A55 100%);
+      box-shadow:0 10px 48px rgba(58,74,85,0.14);
+    }
+    /* img preenche o wrapper quando carregada; oculta-se via onerror caso ausente */
+    .mockup-produto__foto{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     /* ============================================================
@@ -748,6 +806,8 @@
       .preview__card{width:100%;flex-shrink:unset}
       .preview__rodape{padding:2.25rem 2.5rem 0;max-width:none}
       .conteudo{padding:7rem 2.5rem}
+      .mockup-produto{padding:0 2.5rem 6.5rem}
+      .mockup-produto__inner{max-width:260px}
       .origem{padding:7rem 2.5rem}
       .origem__inner{
         grid-template-columns:1fr 1fr;
@@ -845,29 +905,64 @@
 
     <div class="preview__galeria" role="list" aria-label="prévia dos 5 wallpapers da coleção">
 
-      <!-- Substituir cada .preview__card pelo <img> do wallpaper final -->
-      <!-- Wallpaper 1 — substituir pelo arquivo real: assets/wallpapers/wallpaper-01.jpg -->
-      <div class="preview__card preview__card--1 reveal" role="listitem" aria-label="wallpaper 1 de 5">
+      <!-- ARQUIVO → ../assets/wallpapers/wallpaper-01.jpg -->
+      <!-- Quando arquivo existir: img carrega e cobre o gradiente. Se ausente: onerror oculta a img e o gradiente persiste. -->
+      <div class="preview__card preview__card--1 reveal" role="listitem" aria-label="primeiro wallpaper da coleção — paisagem de Garopaba">
+        <img
+          src="../assets/wallpapers/wallpaper-01.jpg"
+          alt="primeiro respiro — luz dourada sobre o mar de Garopaba"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
         <span class="preview__card-num" aria-hidden="true">01</span>
       </div>
 
-      <!-- Wallpaper 2 — substituir pelo arquivo real: assets/wallpapers/wallpaper-02.jpg -->
-      <div class="preview__card preview__card--2 reveal" role="listitem" aria-label="wallpaper 2 de 5">
+      <!-- ARQUIVO → ../assets/wallpapers/wallpaper-02.jpg -->
+      <div class="preview__card preview__card--2 reveal" role="listitem" aria-label="segundo wallpaper da coleção — paisagem de Garopaba">
+        <img
+          src="../assets/wallpapers/wallpaper-02.jpg"
+          alt="segundo respiro — céu quieto de manhã em Garopaba"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
         <span class="preview__card-num" aria-hidden="true">02</span>
       </div>
 
-      <!-- Wallpaper 3 — substituir pelo arquivo real: assets/wallpapers/wallpaper-03.jpg -->
-      <div class="preview__card preview__card--3 reveal" role="listitem" aria-label="wallpaper 3 de 5">
+      <!-- ARQUIVO → ../assets/wallpapers/wallpaper-03.jpg -->
+      <div class="preview__card preview__card--3 reveal" role="listitem" aria-label="terceiro wallpaper da coleção — paisagem de Garopaba">
+        <img
+          src="../assets/wallpapers/wallpaper-03.jpg"
+          alt="terceiro respiro — mar profundo e silêncio em Garopaba"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
         <span class="preview__card-num" aria-hidden="true">03</span>
       </div>
 
-      <!-- Wallpaper 4 — substituir pelo arquivo real: assets/wallpapers/wallpaper-04.jpg -->
-      <div class="preview__card preview__card--4 reveal" role="listitem" aria-label="wallpaper 4 de 5">
+      <!-- ARQUIVO → ../assets/wallpapers/wallpaper-04.jpg -->
+      <div class="preview__card preview__card--4 reveal" role="listitem" aria-label="quarto wallpaper da coleção — paisagem de Garopaba">
+        <img
+          src="../assets/wallpapers/wallpaper-04.jpg"
+          alt="quarto respiro — fim de tarde quente em Garopaba"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
         <span class="preview__card-num" aria-hidden="true">04</span>
       </div>
 
-      <!-- Wallpaper 5 — substituir pelo arquivo real: assets/wallpapers/wallpaper-05.jpg -->
-      <div class="preview__card preview__card--5 reveal" role="listitem" aria-label="wallpaper 5 de 5">
+      <!-- ARQUIVO → ../assets/wallpapers/wallpaper-05.jpg -->
+      <div class="preview__card preview__card--5 reveal" role="listitem" aria-label="quinto wallpaper da coleção — paisagem de Garopaba">
+        <img
+          src="../assets/wallpapers/wallpaper-05.jpg"
+          alt="quinto respiro — areia e neblina ao amanhecer em Garopaba"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
         <span class="preview__card-num" aria-hidden="true">05</span>
       </div>
 
@@ -902,6 +997,28 @@
 
 
   <!-- ============================================================
+       MOCKUP — produto em uso
+       ARQUIVO ESPERADO → ../assets/wallpapers/mockup-celular-respiro.jpg
+       Quando arquivo existir: img carrega e cobre o gradiente.
+       Se ausente: onerror oculta a img; gradiente phone-shaped persiste.
+       ============================================================ -->
+  <div class="mockup-produto">
+    <div class="mockup-produto__inner reveal">
+      <div class="mockup-produto__wrapper">
+        <img
+          class="mockup-produto__foto"
+          src="../assets/wallpapers/mockup-celular-respiro.jpg"
+          alt="celular com wallpaper da coleção Respiro de Garopaba aplicado na tela"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'"
+        >
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
        ORIGEM — sobre Marina e Garopaba
        ============================================================ -->
   <section class="origem" aria-labelledby="origem-titulo">
@@ -919,10 +1036,18 @@
         </p>
       </div>
       <div class="origem__imagem reveal">
-        <!-- Substituir pelo <img> com foto da Marina ou editorial de Garopaba -->
-        <!-- Exemplo: <img class="origem__foto" src="../assets/garopaba/marina-bastidor.jpg" alt="Marina Gomes fotografando em Garopaba ao fim da tarde"> -->
-        <div class="origem__foto-placeholder" aria-label="fotografia editorial de Garopaba — substituir pela imagem final">
-          <!-- placeholder: gradiente representando mar e fim de tarde de Garopaba -->
+        <!-- ARQUIVO ESPERADO → ../assets/garopaba/marina-origem-respiro.jpg -->
+        <!-- Quando arquivo existir: img carrega e cobre o gradiente. -->
+        <!-- Se ausente: onerror oculta a img; gradiente persiste como placeholder editorial. -->
+        <div class="origem__foto-wrapper">
+          <img
+            class="origem__foto"
+            src="../assets/garopaba/marina-origem-respiro.jpg"
+            alt="Marina Gomes em Garopaba — o olhar que deu origem à coleção"
+            loading="lazy"
+            decoding="async"
+            onerror="this.style.display='none'"
+          >
         </div>
       </div>
     </div>
@@ -1061,10 +1186,14 @@
 
       /* Preenche todos os links de checkout */
       function aplicarCheckout(){
-        if(CHECKOUT_URL === '#checkout-pendente') return; // seguro em desenvolvimento
+        var isPendente = CHECKOUT_URL === '#checkout-pendente';
         var btns = document.querySelectorAll('[data-checkout]');
         btns.forEach(function(btn){
           btn.href = CHECKOUT_URL;
+          /* Em modo pendente: impede scroll indesejado ao clicar */
+          if(isPendente){
+            btn.addEventListener('click', function(e){ e.preventDefault(); });
+          }
         });
       }
 
