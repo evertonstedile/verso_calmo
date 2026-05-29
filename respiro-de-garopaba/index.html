@@ -862,6 +862,9 @@
        ============================================================ -->
   <section class="hero" aria-labelledby="hero-titulo">
 
+    <!-- Placeholder de fundo: assume se a foto do hero falhar ao carregar (deploy novo, troca de arquivo) -->
+    <div class="hero__img-placeholder" aria-hidden="true"></div>
+
     <!-- Substituir src pela foto principal da coleção (paisagem de Garopaba, formato landscape ou retrato) -->
     <img
       class="hero__img"
@@ -869,9 +872,8 @@
       alt="paisagem de Garopaba ao fim da tarde — luz dourada sobre o mar"
       fetchpriority="high"
       decoding="async"
+      onerror="this.style.display='none'"
     >
-    <!-- Se a foto acima não estiver disponível no deploy, o placeholder abaixo assume visualmente -->
-    <!-- <div class="hero__img-placeholder" aria-hidden="true"></div> -->
 
     <div class="hero__gradient" aria-hidden="true"></div>
 
@@ -997,10 +999,6 @@
       </div>
 
     </div>
-
-    <div class="preview__rodape reveal">
-      <p>cinco paisagens para lembrar de respirar no meio do dia.</p>
-    </div>
   </section>
 
 
@@ -1092,8 +1090,9 @@
       <div class="preco__bloco reveal">
         <span class="preco__traco" aria-hidden="true"></span>
         <div class="preco__valor">
+          <span class="sr-only">dezessete reais</span>
           <span class="preco__cifra" aria-hidden="true">R$</span>
-          <span class="preco__numero" aria-label="R$ 17">17</span>
+          <span class="preco__numero" aria-hidden="true">17</span>
         </div>
       </div>
       <div class="preco__cta-area reveal">
@@ -1174,7 +1173,7 @@
             <span class="faq__icone" aria-hidden="true"></span>
           </summary>
           <p class="faq__resposta">
-            Direct do <a href="https://instagram.com/versocalmo" rel="noopener noreferrer" target="_blank">@versocalmo</a>. Resolvo pessoalmente.
+            Direct do <a href="https://www.instagram.com/versocalmo" rel="noopener noreferrer" target="_blank">@versocalmo</a>. Resolvo pessoalmente.
           </p>
         </details>
 
