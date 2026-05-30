@@ -6,6 +6,7 @@
   <title>verso calmo — frases, paisagens e objetos de Garopaba</title>
   <meta name="description" content="Verso Calmo é uma marca autoral de presença, escrita em primeira pessoa por Marina Gomes, ancorada em Garopaba/SC. Frases, paisagens e objetos para quem precisa de um respiro no dia.">
   <meta name="theme-color" content="#F6EFE5">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <!-- OG — descomentar após definir domínio final
   <meta property="og:title" content="verso calmo">
   <meta property="og:description" content="frases, paisagens e objetos feitos em Garopaba — por Marina Gomes">
@@ -133,6 +134,7 @@
     .nav.is-scrolled .nav__link:hover { color: var(--vc-tinta-mar); border-color: var(--vc-tinta-mar); }
 
     /* === HERO === */
+    picture { display: contents; }
     .hero {
       position: relative;
       width: 100%;
@@ -748,11 +750,15 @@
     <!-- 1. HERO SENSORIAL -->
     <section class="hero" aria-labelledby="hero-titulo">
       <div class="hero__img-placeholder" aria-hidden="true"></div>
-      <img class="hero__img" id="hero-img"
-        src="assets/garopaba/01-hero-garopaba.jpg"
-        alt="paisagem de Garopaba ao fim da tarde — luz dourada sobre o mar"
-        fetchpriority="high" decoding="async"
-        onerror="this.style.display='none'">
+      <picture>
+        <source srcset="assets/garopaba/01-hero-garopaba.avif" type="image/avif">
+        <source srcset="assets/garopaba/01-hero-garopaba.webp" type="image/webp">
+        <img class="hero__img" id="hero-img"
+          src="assets/garopaba/01-hero-garopaba.jpg"
+          alt="paisagem de Garopaba ao fim da tarde — luz dourada sobre o mar"
+          fetchpriority="high" decoding="async"
+          onerror="this.style.display='none'">
+      </picture>
       <div class="hero__gradient" aria-hidden="true"></div>
       <div class="hero__conteudo">
         <div class="hero__bloco">

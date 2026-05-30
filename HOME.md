@@ -34,7 +34,22 @@ A home é a entrada editorial da Verso Calmo — não é página de venda. É um
 ### Hero
 | Arquivo | Status | Notas |
 |---|---|---|
-| `assets/garopaba/01-hero-garopaba.jpg` | ✅ existe (1,5 MB) | Recomendado comprimir para < 500 KB |
+| `assets/garopaba/01-hero-garopaba.avif` | ✅ existe (526 KB) | Servido 1º via `<picture>` — navegadores modernos |
+| `assets/garopaba/01-hero-garopaba.webp` | ✅ existe (809 KB) | Fallback intermediário |
+| `assets/garopaba/01-hero-garopaba.jpg` | ✅ existe (1,5 MB) | Fallback final + `og:image` (compat. máxima) |
+
+O hero usa `<picture>` (AVIF → WebP → JPG). O navegador baixa só o primeiro
+formato que entende — em geral o AVIF, ~1 MB mais leve que o JPG. O `<img>`
+interno mantém `id="hero-img"` (o parallax depende dele) e o `onerror`.
+
+### Infra de deploy (raiz)
+| Arquivo | Função |
+|---|---|
+| `vercel.json` | Cache headers (assets imutáveis 1 ano; HTML revalida) |
+| `robots.txt` | Libera indexação; aponta o sitemap |
+| `sitemap.xml` | 1 URL; revisar domínio/data antes de publicar |
+| `.nojekyll` | Desliga Jekyll (caso GitHub Pages) |
+| `favicon.svg` | Monograma "vc" da marca |
 
 ### Marina
 | Arquivo | Status | Notas |
