@@ -69,8 +69,8 @@ Executar nessa ordem:
 
 5. Descomentar no `<head>` da página:
    ```html
-   <meta property="og:image" content="https://seudominio.com.br/assets/og/respiro-de-garopaba.jpg">
-   <meta property="og:url" content="https://seudominio.com.br/respiro-de-garopaba">
+   <meta property="og:image" content="https://versocalmo.com.br/assets/og/respiro-de-garopaba.jpg">
+   <meta property="og:url" content="https://versocalmo.com.br/respiro-de-garopaba">
    ```
 
 6. Testar a página localmente:

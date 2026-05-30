@@ -88,8 +88,8 @@ Cinco imagens autorais de Garopaba. São o produto principal. Nenhuma pode falta
 
 **Como ativar:** após criar o arquivo, descomentar no `<head>` da página:
 ```html
-<meta property="og:image" content="https://seudominio.com.br/assets/og/respiro-de-garopaba.jpg">
-<meta property="og:url" content="https://seudominio.com.br/respiro-de-garopaba">
+<meta property="og:image" content="https://versocalmo.com.br/assets/og/respiro-de-garopaba.jpg">
+<meta property="og:url" content="https://versocalmo.com.br/respiro-de-garopaba">
 ```
 
 ---
