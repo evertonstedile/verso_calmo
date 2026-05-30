@@ -169,10 +169,32 @@ verso_calmo/
 > 1. Leia `HOME.md` para recuperar contexto.
 > 2. Vou adicionar os vídeos em `assets/video/` (garopaba-areia, garopaba-luz, garopaba-restinga, garopaba-ondas — MP4 + posters JPG).
 > 3. Confirme que os cards de vídeo carregam poster e reproduzem ao hover.
-> 4. Comprima o hero (`01-hero-garopaba.jpg`) para < 500 KB.
+> 4. O hero já é servido otimizado via `<picture>` (AVIF 526 KB → WebP → JPG). Não precisa recomprimir o JPG.
 > 5. Quando tiver foto da Marina, adicione em `assets/garopaba/marina-origem-respiro.jpg` e confirme que a seção funciona.
 > 6. Não altere copy, seções, tokens ou interações.
 
 ---
 
-*Verso Calmo — documentação da home v1.0*
+## Mapa de branches (consolidação 2026-05-30)
+
+A branch **`claude/adoring-wright-VgQFf`** é a **oficial e consolidada**. Reúne a
+Home editorial, a página do Respiro, toda a documentação e a infra de deploy
+(hero otimizado, `vercel.json`, `robots.txt`, `sitemap.xml`, `.nojekyll`, `favicon.svg`).
+
+Estado das demais branches no momento da consolidação:
+
+| Branch | Relação com adoring-wright | O que fazer |
+|---|---|---|
+| `claude/adoring-wright-VgQFf` | **oficial / consolidada** | usar esta |
+| `claude/busy-ride-nXyIl` | divergente (track paralelo de `/em-breve` + deploy) | **manter como backup** |
+| `claude/hopeful-dijkstra-S1Zi0` | ancestral 100% redundante (já contida em adoring) | pode deletar pela UI do GitHub |
+| `claude/loving-allen-gArLA` | ancestral 100% redundante (já contida em adoring) | pode deletar pela UI do GitHub |
+
+> As duas redundantes não puderam ser deletadas via CLI (o proxy git do ambiente
+> retorna HTTP 403 para deletar branches que não a designada). Deletá-las é seguro
+> — cada commit delas já está em `adoring-wright`. Fazer pela aba **Branches** do
+> GitHub. **Não deletar `busy-ride`** (é o único lugar com aquele track de trabalho).
+
+---
+
+*Verso Calmo — documentação da home v1.1*
