@@ -250,7 +250,7 @@
       font-weight:400;
       font-size:0.75rem;
       letter-spacing:0.03em;
-      color:rgba(246,239,229,0.6);
+      color:rgba(246,239,229,0.75);
       line-height:1.5;
     }
     .microcopy--escuro{
@@ -443,7 +443,7 @@
       line-height:1.15;
       color:var(--vc-tinta-mar);
       letter-spacing:-0.005em;
-      margin-top:-1.25rem;
+      margin-top:0.375rem;
     }
     .conteudo__lista{
       list-style:none;
@@ -520,7 +520,7 @@
       aspect-ratio:3/4;
       border-radius:6px;
       overflow:hidden;
-      background:linear-gradient(160deg,#C8A77D 0%,#D8915A 50%,#3A4A55 100%);
+      background:linear-gradient(160deg,#AFC7C9 0%,#C8A77D 45%,#1F3A3D 100%);
     }
     /* img preenche o wrapper quando carregada; oculta-se via onerror caso ausente */
     .origem__foto{
@@ -548,7 +548,7 @@
       aspect-ratio:9/19.5;
       border-radius:20px;
       overflow:hidden;
-      background:linear-gradient(175deg,#E8D9C2 0%,#D8915A 42%,#3A4A55 100%);
+      background:linear-gradient(175deg,#AFC7C9 0%,#C8A77D 40%,#1F3A3D 100%);
       box-shadow:0 10px 48px rgba(58,74,85,0.14);
     }
     /* img preenche o wrapper quando carregada; oculta-se via onerror caso ausente */
@@ -674,6 +674,8 @@
       cursor:pointer;
       text-align:left;
       line-height:1.4;
+      letter-spacing:0;
+      word-spacing:normal;
       -webkit-appearance:none;
       list-style:none;
     }
@@ -748,10 +750,14 @@
       letter-spacing:-0.005em;
     }
     .fechamento__gesto{
-      font-size:1.375rem;
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-style:italic;
+      font-size:1.125rem;
+      letter-spacing:0.2em;
       line-height:1;
-      opacity:0.5;
-      /* Pomba em unicode — acessível sem emoji visual pesado */
+      opacity:0.35;
+      color:var(--vc-tinta-mar);
     }
 
     /* ============================================================
@@ -802,7 +808,7 @@
        ============================================================ */
     @media(max-width:640px){
       .hero{min-height:560px}
-      .hero__bloco{left:1.25rem;right:1.25rem;bottom:1.75rem;max-width:none}
+      .hero__bloco{left:1.25rem;right:1.25rem;bottom:2.75rem;max-width:none}
       .emocional{padding:4rem 1.5rem}
       .preview{padding:4rem 0 4.5rem}
       .preview__header{padding:0 1.5rem 2rem}
@@ -1191,7 +1197,7 @@
         a tela que você olha todos os dias<br>
         pode ser um pouco mais sua.
       </p>
-      <span class="fechamento__gesto" aria-hidden="true">🕊️</span>
+      <span class="fechamento__gesto" aria-hidden="true">vc</span>
     </div>
   </section>
 
