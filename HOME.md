@@ -84,6 +84,21 @@ Os mesmos 5 wallpapers de `respiro-de-garopaba/`. Ver `respiro-de-garopaba/ASSET
 
 ---
 
+## Ponte para o Respiro (seção 6) — tom de preview, não de venda
+
+A home **não é página de venda**. Enquanto o checkout do Respiro está pendente
+(`CHECKOUT_URL = '#checkout-pendente'` em `respiro-de-garopaba/index.html`), a
+ponte fica em tom editorial:
+
+- preço: **"em preparação"** (não exibir "R$ 17" aqui antes do checkout existir);
+- CTA: **"conhecer o respiro"** (evitar "ver a coleção", "comprar", "garantir").
+
+**Quando o checkout estiver pronto e testado** (ver `respiro-de-garopaba/CHECKOUT.md`
+e `AUDITORIA-FINAL.md`), aí sim pode-se reativar o preço e um CTA mais direto na
+ponte, se a Marina quiser. Até lá, manter o tom de preview.
+
+---
+
 ## O que não tocar
 
 - Copy: headline, manifesto, bio, frase editorial — aprovados
@@ -91,6 +106,7 @@ Os mesmos 5 wallpapers de `respiro-de-garopaba/`. Ver `respiro-de-garopaba/ASSET
 - Tokens CSS (`:root`)
 - Padrão de acessibilidade (skip-link, aria-labels, sr-only)
 - Nav link para `respiro-de-garopaba/`
+- Tom da ponte do Respiro enquanto o checkout não estiver no ar (ver acima)
 
 ---
 
