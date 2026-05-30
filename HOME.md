@@ -54,7 +54,8 @@ interno mantém `id="hero-img"` (o parallax depende dele) e o `onerror`.
 ### Marina
 | Arquivo | Status | Notas |
 |---|---|---|
-| `assets/garopaba/marina-origem-respiro.jpg` | ❌ pendente | Placeholder: gradiente âmbar → areia |
+| `assets/garopaba/01-hero-garopaba.jpg` | ✅ em uso | Garopaba como visual de apoio na seção Marina (até foto real da Marina chegar) |
+| `assets/garopaba/marina-origem-respiro.jpg` | ❌ pendente | Quando disponível, substituir `src` no `marina__foto-wrapper` |
 
 ### Vídeos do Acervo (4 arquivos)
 | Arquivo | Status | Notas |
@@ -116,7 +117,8 @@ ponte, se a Marina quiser. Até lá, manter o tom de preview.
 
 ## O que não tocar
 
-- Copy: headline, manifesto, bio, frase editorial — aprovados
+- Copy: headline, manifesto, frase editorial — aprovados
+- Seção Marina: label "POR MARINA GOMES", headline "entre o mar, o registro / e o que me atravessa.", bio sem "escrevo porque preciso" — revisados e aprovados (2026-05-30)
 - Estrutura de seções e ordem
 - Tokens CSS (`:root`)
 - Padrão de acessibilidade (skip-link, aria-labels, sr-only)
@@ -142,8 +144,8 @@ verso_calmo/
 ├── HOME.md                  ← este documento
 ├── assets/
 │   ├── garopaba/
-│   │   ├── 01-hero-garopaba.jpg   ✅ (hero, parallax)
-│   │   └── marina-origem-respiro.jpg  ❌ (seção Marina)
+│   │   ├── 01-hero-garopaba.jpg   ✅ (hero, parallax e visual Marina)
+│   │   └── marina-origem-respiro.jpg  ❌ (foto real da Marina — pendente)
 │   ├── video/
 │   │   ├── README.md
 │   │   ├── garopaba-areia.mp4     ❌ (card 1)
@@ -197,4 +199,14 @@ Estado das demais branches no momento da consolidação:
 
 ---
 
-*Verso Calmo — documentação da home v1.1*
+---
+
+## Changelog
+
+| Data | O que mudou |
+|---|---|
+| 2026-05-30 | Seção Marina: label → "POR MARINA GOMES"; headline → "entre o mar, o registro / e o que me atravessa."; bio: removido "escrevo porque preciso", mantida voz de presença sensível; foto-wrapper: usa `01-hero-garopaba.jpg` como visual de apoio (placeholder âmbar eliminado) |
+| 2026-05-30 | Hero mobile: `bottom` 2.25rem → 3.5rem; assinatura: opacidade 0.45 → 0.62 |
+| 2026-05-30 | Acervo: subtitle "passe o dedo ou o cursor para sentir" → "mar, luz e silêncio, em construção" |
+
+*Verso Calmo — documentação da home v1.2*

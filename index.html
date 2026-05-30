@@ -219,7 +219,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(246,239,229,0.45);
+      color: rgba(246,239,229,0.62);
     }
     .hero__scroll {
       display: flex;
@@ -360,6 +360,7 @@
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center 35%;
     }
 
     /* === TERRITÓRIO === */
@@ -726,7 +727,7 @@
     }
 
     @media (max-width: 639px) {
-      .hero__conteudo { left: 1.25rem; right: 1.25rem; bottom: 2.25rem; }
+      .hero__conteudo { left: 1.25rem; right: 1.25rem; bottom: 3.5rem; }
       .hero__scroll { display: none; }
       .manifesto { padding: 5rem 1.5rem; }
       .marina, .territorio, .acervo, .respiro-ponte { padding: 5rem 1.5rem; }
@@ -798,22 +799,21 @@
     <section class="marina" aria-labelledby="marina-titulo">
       <div class="marina__inner">
         <div class="marina__texto">
-          <span class="secao__label reveal">QUEM ESCREVE</span>
+          <span class="secao__label reveal">POR MARINA GOMES</span>
           <h2 class="marina__titulo reveal reveal-delay-1" id="marina-titulo">
-            sou Marina Gomes,<br><em>escrevo daqui.</em>
+            entre o mar, o registro<br><em>e o que me atravessa.</em>
           </h2>
           <div class="marina__bio reveal reveal-delay-2">
             <p>nasci em Garopaba — ou aprendi a nascer aqui, depois de anos entendendo o que significa morar à beira de um mar desse tamanho.</p>
-            <p>escrevo porque preciso. fotografo para guardar a luz antes que ela mude. e crio objetos porque quero que esse gesto de respiro chegue onde estiver — na tela do celular de alguém, num copo de água do dia a dia, num envelope que chega pelo correio.</p>
+            <p>fotografo para guardar a luz antes que ela mude. crio com palavras e com imagem porque quero que esse gesto de respiro chegue onde estiver — na tela do celular de alguém, numa pausa no meio do dia.</p>
             <p>cada coisa que faço sai daqui, da vista que tenho, do vento que chega de tarde.</p>
           </div>
         </div>
-        <div class="marina__foto-wrapper reveal reveal-delay-1" role="img" aria-label="Marina Gomes em Garopaba">
+        <div class="marina__foto-wrapper reveal reveal-delay-1" role="img" aria-label="Garopaba/SC — o lugar de onde a Verso Calmo nasce">
           <img class="marina__foto"
-            src="assets/garopaba/marina-origem-respiro.jpg"
-            alt="Marina Gomes em Garopaba"
-            loading="lazy" decoding="async"
-            onerror="this.style.display='none'">
+            src="assets/garopaba/01-hero-garopaba.jpg"
+            alt="Garopaba/SC — o mar que inspira a Verso Calmo"
+            loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -839,7 +839,7 @@
         <div class="acervo__header">
           <span class="secao__label reveal">ACERVO</span>
           <h2 class="acervo__titulo reveal reveal-delay-1" id="acervo-titulo">imagens que ficam</h2>
-          <p class="acervo__sub reveal reveal-delay-2">cenas de Garopaba — passe o dedo ou o cursor para sentir</p>
+          <p class="acervo__sub reveal reveal-delay-2">registros de Garopaba — mar, luz e silêncio, em construção</p>
         </div>
         <div class="acervo__grid" role="list" aria-label="acervo de imagens e vídeos de Garopaba">
 
