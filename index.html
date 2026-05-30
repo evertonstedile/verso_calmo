@@ -112,9 +112,10 @@
       color: var(--vc-sal);
       text-decoration: none;
       text-transform: lowercase;
-      transition: color 0.5s ease;
+      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+      transition: color 0.5s ease, text-shadow 0.5s ease;
     }
-    .nav.is-scrolled .nav__marca { color: var(--vc-tinta-mar); }
+    .nav.is-scrolled .nav__marca { color: var(--vc-tinta-mar); text-shadow: none; }
     .nav__link {
       font-family: 'Manrope', sans-serif;
       font-weight: 500;
@@ -124,10 +125,11 @@
       text-decoration: none;
       padding-bottom: 2px;
       border-bottom: 1px solid rgba(246,239,229,0.25);
-      transition: color 0.4s ease, border-color 0.4s ease;
+      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+      transition: color 0.4s ease, border-color 0.4s ease, text-shadow 0.4s ease;
     }
     .nav__link:hover { color: var(--vc-sal); border-color: rgba(246,239,229,0.7); }
-    .nav.is-scrolled .nav__link { color: var(--vc-tinta-mar-suave); border-color: var(--vc-borda); }
+    .nav.is-scrolled .nav__link { color: var(--vc-tinta-mar-suave); border-color: var(--vc-borda); text-shadow: none; }
     .nav.is-scrolled .nav__link:hover { color: var(--vc-tinta-mar); border-color: var(--vc-tinta-mar); }
 
     /* === HERO === */
