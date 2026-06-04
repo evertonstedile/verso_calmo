@@ -1,5 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/em-breve", "destination": "/", "permanent": true },
+    { "source": "/em-breve/:path*", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
