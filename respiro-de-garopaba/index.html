@@ -56,27 +56,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
 
   <style>
     /* ============================================================
-       RESET + TOKENS
+       RESET
        ============================================================ */
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-
-    :root{
-      /* Modo Respiro — paleta principal */
-      --vc-sal:#F6EFE5;
-      --vc-areia-clara:#E8D9C2;
-      --vc-areia-umida:#C8A77D;
-      --vc-ambar-suave:#D8915A;
-      --vc-ceu-quieto:#AFC7C9;
-      --vc-tinta-mar:#3A4A55;
-      --vc-tinta-mar-suave:#5a6770;
-      --vc-borda:rgba(58,74,85,0.12);
-      /* Modo Profundidade — rodapé e contraste */
-      --vc-noite-mar:#101417;
-      --vc-mar-profundo:#1F3A3D;
-    }
 
     html{
       font-size:16px;
@@ -366,7 +352,7 @@
     .preview__card--1{background:linear-gradient(175deg,#E8D9C2 0%,#D8915A 55%,#C8A77D 100%)}
     .preview__card--2{background:linear-gradient(175deg,#AFC7C9 0%,#F6EFE5 50%,#E8D9C2 100%)}
     .preview__card--3{background:linear-gradient(175deg,#3A4A55 0%,#1F3A3D 60%,#101417 100%)}
-    .preview__card--4{background:linear-gradient(175deg,#C8A77D 0%,#D8915A 45%,#3A2A22 100%)}
+    .preview__card--4{background:linear-gradient(175deg,#C8A77D 0%,#D8915A 45%,var(--vc-tinta-mar) 100%)}
     .preview__card--5{background:linear-gradient(175deg,#F6EFE5 0%,#AFC7C9 55%,#C8A77D 100%)}
     .preview__card img{
       position:relative;
