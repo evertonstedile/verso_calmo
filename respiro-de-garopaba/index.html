@@ -160,6 +160,23 @@
       );
       pointer-events:none;
     }
+    /* Wordmark de orientação — mesmo tratamento tipográfico do nav da Home */
+    .hero__marca{
+      position:absolute;
+      top:1.75rem;
+      left:1.75rem;
+      z-index:2;
+      font-family:'Fraunces',serif;
+      font-weight:300;
+      font-size:0.9375rem;
+      letter-spacing:0.14em;
+      color:var(--vc-sal);
+      text-decoration:none;
+      text-transform:lowercase;
+      text-shadow:0 1px 12px rgba(16,20,23,0.45);
+      transition:opacity 0.3s ease;
+    }
+    .hero__marca:hover{opacity:0.72}
     .hero__bloco{
       position:absolute;
       left:1.75rem;
@@ -797,6 +814,7 @@
        ============================================================ */
     @media(max-width:640px){
       .hero{min-height:560px}
+      .hero__marca{top:1.5rem;left:1.25rem}
       .hero__bloco{left:1.25rem;right:1.25rem;bottom:2.75rem;max-width:none}
       .emocional{padding:4rem 1.5rem}
       .preview{padding:4rem 0 4.5rem}
@@ -813,6 +831,7 @@
     }
 
     @media(min-width:768px){
+      .hero__marca{top:2.25rem;left:3rem}
       .hero__bloco{left:3rem;bottom:3.25rem;gap:1.5rem}
       .emocional{padding:7rem 2.5rem}
       .preview{padding:6rem 0 6.5rem}
@@ -841,6 +860,7 @@
     }
 
     @media(min-width:1024px){
+      .hero__marca{top:2.75rem;left:4.5rem}
       .hero__bloco{left:4.5rem;bottom:4rem}
       .origem__inner{gap:6rem}
     }
@@ -856,6 +876,9 @@
        HERO — visível sem scroll no mobile
        ============================================================ -->
   <section class="hero" aria-labelledby="hero-titulo">
+
+    <!-- Wordmark de orientação — retorno discreto à Home (mesmo padrão do nav da Home) -->
+    <a class="hero__marca" href="/" aria-label="verso calmo — voltar para a página inicial">verso calmo</a>
 
     <!-- Placeholder de fundo: assume se a foto do hero falhar ao carregar (deploy novo, troca de arquivo) -->
     <div class="hero__img-placeholder" aria-hidden="true"></div>
