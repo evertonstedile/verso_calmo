@@ -82,8 +82,8 @@ Para cada momento: **objetivo · o que aparece · comportamento · copy sugerida
 
 ### Momento 5 — O gesto · *noite, Modo Profundidade (escuro)*
 - **Objetivo:** o convite. Não um CTA de loja — um gesto.
-- **Aparece:** o produto de wallpapers (Versos do Mar — `14_lancamento`), fundo noite de mar.
-- **Copy:** *Versos do Mar* / *respiros de Garopaba para a tela do seu dia.* Botão-gesto: **levar comigo** (acento âmbar). → leva ao checkout Kiwify customizado (seção 6).
+- **Aparece:** o produto de wallpapers (Respiro de Garopaba), fundo noite de mar.
+- **Copy:** *Respiro de Garopaba* / *respiros de Garopaba para a tela do seu dia.* Botão-gesto: **levar comigo** (acento âmbar). → leva ao checkout Kiwify customizado (seção 6).
 
 ### Momento 6 — Assinatura · *rodapé, escuro*
 - **Aparece:** rodapé denso, selo V/C, *criado em garopaba, santa catarina. por marina gomes.* Links discretos (Instagram, contato). Fim como quem assina uma carta.
@@ -147,7 +147,7 @@ Requisitos (o *quê*). A implementação (o *como*) sai na seção 10, depois de
 - Loop curto e contínuo (ideal 8–15s), **mudo**, inline (`muted`, `loop`, `playsinline`, `autoplay` — autoplay de vídeo **mudo** é permitido, diferente de áudio).
 - **Imagem-poster** (frame estático) aparece instantânea enquanto o vídeo carrega → protege o LCP e evita tela preta.
 - Formatos: MP4 H.264 (universal) + opcional WebM/VP9 ou HEVC menor. Comprimir forte; manter o loop bem leve.
-- **Mobile / 4G:** servir encode mais leve/curto **ou** cair para o poster estático. Não dar autoplay de vídeo HD em conexão móvel. Considerar `Save-Data`.
+- **Um único vídeo para todos os dispositivos** (loop ~2MB; o navegador escolhe webm/mp4). O poster estático carrega instantâneo e cobre qualquer carregamento lento ou falho. Servir o poster no lugar do vídeo **apenas por sinal explícito do usuário**: `Save-Data` / `prefers-reduced-data` ou `prefers-reduced-motion`.
 
 ### "Vídeo que roda com o scroll" — decisão honesta
 Há duas leituras desse pedido:
@@ -172,7 +172,7 @@ Recomendação: adotar (b) em todos os dispositivos; (a) só se desktop comporta
 | Risco | Mitigação |
 |---|---|
 | Vídeo pesado mata o LCP e o usuário sai antes de ver | Poster instantâneo + vídeo comprimido + fallback estático em mobile/lenta |
-| Consumo de dados afasta a audiência (mobile) | Sem autoplay HD em 4G; encode leve no celular |
+| Consumo de dados (mobile) | Loop ~2MB, baixado uma vez; poster instantâneo como base. Sem vídeo só se `Save-Data`/`reduced-motion` |
 | Cara de IA / template (já doeu no `/em-breve`) | Vídeo e fotos reais de Garopaba como herói absoluto. Zero stock, zero ilustração genérica |
 | Scroll-scrubbing travando em celular | Padrão = loop + parallax leve (opção b); scrubbing só desktop |
 | Quebra brutal na ida para a Kiwify | Customização total da Kiwify como parte do projeto (seção 6) |
@@ -202,7 +202,7 @@ Recomendação: adotar (b) em todos os dispositivos; (a) só se desktop comporta
 
 **Técnico**
 - [ ] Abre rápido em celular real (poster instantâneo)?
-- [ ] Não dá autoplay de vídeo HD em 4G?
+- [ ] Vídeo leve (~2MB) em todos os aparelhos, com poster cobrindo carregamento lento/falho?
 - [ ] `prefers-reduced-motion` respeitado?
 
 **Teste final**
