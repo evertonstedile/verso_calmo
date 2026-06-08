@@ -28,7 +28,7 @@
   <link rel="canonical" href="https://versocalmo.com.br/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/tokens.css">
   <script defer src="/_vercel/speed-insights/script.js"></script>
   <style>
@@ -252,10 +252,10 @@
     /* === LABEL PADRÃO === */
     .secao__label {
       font-family: 'Manrope', sans-serif;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 0.6875rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
       color: var(--vc-tinta-mar-suave);
       opacity: 0.65;
     }
@@ -669,16 +669,16 @@
       font-weight: 400;
       font-size: 0.8125rem;
       letter-spacing: 0.05em;
-      color: rgba(246,239,229,0.38);
+      color: rgba(246,239,229,0.62);
       text-decoration: none;
       transition: color 0.3s ease;
     }
-    .rodape__link:hover { color: rgba(246,239,229,0.75); }
+    .rodape__link:hover { color: rgba(246,239,229,0.9); }
     .rodape__copy {
       font-family: 'Manrope', sans-serif;
       font-weight: 400;
       font-size: 0.75rem;
-      color: rgba(246,239,229,0.18);
+      color: rgba(246,239,229,0.55);
       letter-spacing: 0.04em;
     }
 
@@ -882,7 +882,7 @@
       <div class="hero__img-placeholder" aria-hidden="true"></div>
       <video class="hero__video" id="hero-video"
         poster="assets/video/hero_poster.jpg"
-        muted loop playsinline webkit-playsinline autoplay preload="auto"
+        muted loop playsinline webkit-playsinline preload="metadata"
         aria-hidden="true">
         <source src="assets/video/hero_loop.mp4" type="video/mp4">
       </video>
@@ -974,6 +974,7 @@
     </section>
 
     <!-- 5. ACERVO EM MOVIMENTO -->
+    <!-- ACERVO oculto até os 4 clipes reais existirem (garopaba-areia/luz/restinga/ondas.mp4 davam 404). Restaurar removendo este comentario de abertura e o de fechamento logo abaixo da secao.
     <section class="acervo" aria-labelledby="acervo-titulo">
       <div class="acervo__inner">
         <div class="acervo__header">
@@ -1066,6 +1067,7 @@
         </div>
       </div>
     </section>
+    --> <!-- fim do ACERVO oculto -->
 
     <div class="luz luz--entardecer" aria-hidden="true"></div>
 
@@ -1164,30 +1166,54 @@
     window.addEventListener('scroll', atualizarNav, { passive: true });
     atualizarNav();
 
-    // Vídeo hero: fallback estático no Save-Data ou reduced-motion (decisão ÚNICA no load — nunca em resize/scroll)
+    // Vídeo hero: fallback estático (Save-Data, reduced-motion ou conexão 2g/slow-2g) — decisão ÚNICA no load, nunca em resize/scroll
     var heroVideo = document.getElementById('hero-video');
-    var saveData = !!(navigator.connection && navigator.connection.saveData);
-    var heroFallback = saveData || prefersReducedMotion;
+    var conexao = navigator.connection || null;
+    var saveData = !!(conexao && conexao.saveData);
+    var conexaoLenta = !!(conexao && (conexao.effectiveType === '2g' || conexao.effectiveType === 'slow-2g'));
+    var heroFallback = saveData || prefersReducedMotion || conexaoLenta;
     if (heroVideo && heroFallback) {
       heroVideo.querySelectorAll('source').forEach(function (s) { s.remove(); });
-      heroVideo.load();
+      heroVideo.load();   // descarta o vídeo; fica só o poster
       heroVideo.pause();
     }
 
-    // Rede de segurança: iOS às vezes pausa o autoplay; religa só quando o vídeo está visível e fora do fallback
+    // Vídeo hero: toca SÓ quando visível (IntersectionObserver), pausa ao sair — economiza CPU/bateria/banda
     if (heroVideo && !heroFallback) {
+      var heroPausaIntencional = false;
       var heroVisivel = function () {
         var r = heroVideo.getBoundingClientRect();
         return r.bottom > 0 && r.top < window.innerHeight;
       };
-      var retomarHero = function () {
-        if (heroFallback || document.hidden || !heroVisivel()) return;
+      var tocarHero = function () {
+        if (heroFallback || document.hidden) return;
         var p = heroVideo.play();
         if (p && p.catch) p.catch(function () {});
       };
+      // rede de segurança: iOS às vezes pausa o playback; religa se visível e fora do fallback
+      var retomarHero = function () {
+        if (heroFallback || document.hidden || !heroVisivel()) return;
+        tocarHero();
+      };
+      if ('IntersectionObserver' in window) {
+        var heroObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              tocarHero();
+            } else {
+              heroPausaIntencional = true;   // marca a pausa do observer pra não brigar com a rede de segurança
+              heroVideo.pause();
+            }
+          });
+        }, { threshold: 0.15 });
+        heroObs.observe(heroVideo);
+      } else {
+        tocarHero();   // sem IntersectionObserver: toca direto
+      }
       heroVideo.addEventListener('ended', retomarHero);
       heroVideo.addEventListener('pause', function () {
-        if (!document.hidden) retomarHero();
+        if (heroPausaIntencional) { heroPausaIntencional = false; return; }
+        if (!document.hidden && heroVisivel()) retomarHero();
       });
       document.addEventListener('visibilitychange', retomarHero);
       window.addEventListener('focus', retomarHero);
