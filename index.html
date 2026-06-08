@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#F6EFE5">
   <meta name="robots" content="index,follow">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="assets/video/hero_poster.jpg" fetchpriority="high">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Verso Calmo">
@@ -52,6 +53,7 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     img, video { display: block; max-width: 100%; }
+    picture { display: contents; }
     a { color: inherit; }
 
     /* === ACESSIBILIDADE === */
@@ -130,7 +132,6 @@
     .nav.is-scrolled .nav__link:hover { color: var(--vc-tinta-mar); border-color: var(--vc-tinta-mar); }
 
     /* === HERO === */
-    picture { display: contents; }
     .hero {
       position: relative;
       width: 100%;
@@ -146,7 +147,7 @@
       background: linear-gradient(160deg, var(--vc-areia-umida) 0%, var(--vc-mar-profundo) 60%, var(--vc-noite-mar) 100%);
       z-index: 0;
     }
-    .hero__img {
+    .hero__video {
       position: absolute;
       top: -25%; left: 0;
       width: 100%; height: 130%;
@@ -542,8 +543,8 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.9rem 1.75rem;
-      background: var(--vc-sal);
-      color: var(--vc-tinta-mar);
+      background: var(--vc-ambar);
+      color: var(--vc-noite-mar);
       font-family: 'Manrope', sans-serif;
       font-weight: 500;
       font-size: 0.9375rem;
@@ -553,7 +554,7 @@
       align-self: flex-start;
       transition: background 0.3s ease, transform 0.2s ease;
     }
-    .respiro-ponte__cta:hover { background: var(--vc-areia-clara); transform: translateY(-1px); }
+    .respiro-ponte__cta:hover { background: var(--vc-ambar-suave); transform: translateY(-1px); }
     .respiro-ponte__cta:active { transform: translateY(0); }
     .respiro-ponte__galeria {
       display: flex;
@@ -681,6 +682,133 @@
       letter-spacing: 0.04em;
     }
 
+    /* === PASSAGEM DE LUZ (transições de um dia) === */
+    .luz {
+      width: 100%;
+      border: 0;
+      pointer-events: none;
+    }
+    .luz--amanhecer {
+      height: clamp(160px, 26vh, 260px);
+      background: linear-gradient(
+        to bottom,
+        var(--vc-noite-mar) 0%,
+        var(--vc-tinta-mar) 32%,
+        var(--vc-areia-umida) 72%,
+        var(--vc-sal) 100%
+      );
+    }
+    .luz--entardecer {
+      height: clamp(160px, 26vh, 260px);
+      background: linear-gradient(
+        to bottom,
+        var(--vc-sal) 0%,
+        var(--vc-areia-umida) 38%,
+        var(--vc-ambar-suave) 58%,
+        var(--vc-tinta-mar) 80%,
+        var(--vc-mar-profundo) 100%
+      );
+    }
+
+    /* === SOM — CONVITE + CONTROLE === */
+    .hero__som-convite {
+      position: absolute;
+      left: 1.75rem;
+      right: 1.75rem;
+      top: 42%;
+      z-index: 3;
+      max-width: 340px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+    }
+    .hero__som-convite.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .hero__som-convite.is-hiding {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    .hero__som-texto {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(0.9375rem, 2.4vw, 1.0625rem);
+      line-height: 1.55;
+      color: rgba(246,239,229,0.82);
+      letter-spacing: 0.008em;
+      margin-bottom: 1rem;
+      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+    }
+    .hero__som-opcoes {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+    .hero__som-btn {
+      background: none;
+      border: none;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      font-size: 0.8125rem;
+      letter-spacing: 0.05em;
+      color: rgba(246,239,229,0.78);
+      transition: color 0.3s ease;
+      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .hero__som-btn:hover,
+    .hero__som-btn:focus-visible { color: var(--vc-sal); }
+    .hero__som-sep {
+      color: rgba(246,239,229,0.32);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.75rem;
+      user-select: none;
+      pointer-events: none;
+    }
+    .som-controle {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.75rem;
+      z-index: 200;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.75rem;
+      color: var(--vc-sal);
+      opacity: 0.65;
+      filter: drop-shadow(0 1px 4px rgba(16,20,23,0.5));
+      transition: opacity 0.4s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .som-controle:hover { opacity: 1; }
+    .som-controle:focus-visible {
+      outline: 2px solid var(--vc-ambar-suave);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .som-controle.is-muted { opacity: 0.32; }
+    .som-controle__svg {
+      display: block;
+      width: 32px;
+      height: 10px;
+      overflow: visible;
+    }
+    @media (min-width: 640px) {
+      .hero__som-convite { top: 55%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero__som-convite,
+      .hero__som-convite.is-hiding { transition: opacity 0.2s ease; }
+    }
+
     /* === REVEAL === */
     .reveal {
       opacity: 1; transform: none;
@@ -747,15 +875,20 @@
     <!-- 1. HERO SENSORIAL -->
     <section class="hero" aria-labelledby="hero-titulo">
       <div class="hero__img-placeholder" aria-hidden="true"></div>
-      <picture>
-        <source srcset="assets/garopaba/01-hero-garopaba.avif" type="image/avif">
-        <source srcset="assets/garopaba/01-hero-garopaba.webp" type="image/webp">
-        <img class="hero__img" id="hero-img"
-          src="assets/garopaba/01-hero-garopaba.jpg"
-          alt="paisagem de Garopaba ao fim da tarde — luz dourada sobre o mar"
-          fetchpriority="high" decoding="async"
-          onerror="this.style.display='none'">
-      </picture>
+      <video class="hero__video" id="hero-video"
+        poster="assets/video/hero_poster.jpg"
+        muted loop playsinline autoplay
+        aria-hidden="true">
+        <source src="assets/video/hero_loop.mp4" type="video/mp4">
+      </video>
+      <div class="hero__som-convite" id="som-convite" aria-live="polite">
+        <p class="hero__som-texto">gravei o som do mar de garopaba pra este instante.</p>
+        <div class="hero__som-opcoes" role="group" aria-label="opções de som">
+          <button class="hero__som-btn" id="btn-ouvir" type="button">ouvir</button>
+          <span class="hero__som-sep" aria-hidden="true">·</span>
+          <button class="hero__som-btn" id="btn-silencio" type="button">seguir em silêncio</button>
+        </div>
+      </div>
       <div class="hero__gradient" aria-hidden="true"></div>
       <div class="hero__conteudo">
         <div class="hero__bloco">
@@ -791,6 +924,8 @@
       </div>
     </section>
 
+    <div class="luz luz--amanhecer" aria-hidden="true"></div>
+
     <!-- 3. MARINA -->
     <section class="marina" aria-labelledby="marina-titulo">
       <div class="marina__inner">
@@ -806,10 +941,14 @@
           </div>
         </div>
         <div class="marina__foto-wrapper reveal reveal-delay-1" role="img" aria-label="Garopaba/SC — o lugar de onde a Verso Calmo nasce">
-          <img class="marina__foto"
-            src="assets/garopaba/01-hero-garopaba.jpg"
-            alt="Garopaba/SC — o mar que inspira a Verso Calmo"
-            loading="lazy" decoding="async">
+          <picture>
+            <source srcset="assets/garopaba/01-hero-garopaba.avif" type="image/avif">
+            <source srcset="assets/garopaba/01-hero-garopaba.webp" type="image/webp">
+            <img class="marina__foto"
+              src="assets/garopaba/01-hero-garopaba.jpg"
+              alt="Garopaba/SC — o mar que inspira a Verso Calmo"
+              loading="lazy" decoding="async">
+          </picture>
         </div>
       </div>
     </section>
@@ -923,6 +1062,8 @@
       </div>
     </section>
 
+    <div class="luz luz--entardecer" aria-hidden="true"></div>
+
     <!-- 6. RESPIRO DE GAROPABA — ponte para o produto -->
     <section class="respiro-ponte" aria-labelledby="respiro-ponte-titulo">
       <div class="respiro-ponte__inner">
@@ -977,6 +1118,15 @@
 
   </main>
 
+  <button class="som-controle" id="som-controle" type="button"
+    aria-label="silenciar o mar" hidden>
+    <svg class="som-controle__svg" viewBox="0 0 32 10" fill="none"
+      xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path id="som-onda-path" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <audio id="audio-mar" loop preload="none" aria-hidden="true"></audio>
+
   <footer class="rodape">
     <div class="rodape__inner">
       <span class="rodape__marca">verso calmo</span>
@@ -1009,16 +1159,24 @@
     window.addEventListener('scroll', atualizarNav, { passive: true });
     atualizarNav();
 
+    // Vídeo hero: fallback estático no Save-Data ou reduced-motion
+    var heroVideo = document.getElementById('hero-video');
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+    if (heroVideo && (saveData || prefersReducedMotion)) {
+      heroVideo.querySelectorAll('source').forEach(function (s) { s.remove(); });
+      heroVideo.load();
+      heroVideo.pause();
+    }
+
     // Parallax hero
     if (!prefersReducedMotion) {
-      var heroImg = document.getElementById('hero-img');
       var rafHero = null;
       var limiteParallax = window.innerHeight * 1.6;
       function atualizarParallax() {
-        if (!heroImg) return;
+        if (!heroVideo) return;
         var s = window.scrollY;
         if (s < limiteParallax) {
-          heroImg.style.transform = 'translateY(' + (s * 0.25) + 'px)';
+          heroVideo.style.transform = 'translateY(' + (s * 0.25) + 'px)';
         }
       }
       window.addEventListener('scroll', function () {
@@ -1084,6 +1242,125 @@
         }
       });
     }
+
+    // === SOM ===
+    var somEscolhido = false;
+    var somAtivo = false;
+    var somMutado = false;
+    var audioMar = document.getElementById('audio-mar');
+    var somConvite = document.getElementById('som-convite');
+    var btnOuvir = document.getElementById('btn-ouvir');
+    var btnSilencio = document.getElementById('btn-silencio');
+    var somControle = document.getElementById('som-controle');
+    var somOndaPath = document.getElementById('som-onda-path');
+
+    function fadeVolume(audio, alvo, duracao, callback) {
+      var inicio = audio.volume;
+      var delta = alvo - inicio;
+      var tsInicio = null;
+      function tick(ts) {
+        if (!tsInicio) tsInicio = ts;
+        var p = Math.min((ts - tsInicio) / (duracao * 1000), 1);
+        audio.volume = Math.max(0, Math.min(1, inicio + delta * p));
+        if (p < 1) { requestAnimationFrame(tick); } else { if (callback) callback(); }
+      }
+      requestAnimationFrame(tick);
+    }
+
+    var somOndaT = 0;
+    var somOndaRaf = null;
+    function iniciarOnda() {
+      if (somOndaRaf) cancelAnimationFrame(somOndaRaf);
+      if (prefersReducedMotion) {
+        if (somOndaPath) somOndaPath.setAttribute('d', 'M0 5 Q8 5 16 5 Q24 5 32 5');
+        return;
+      }
+      function tick() {
+        somOndaT += 0.022;
+        var amp = 2.6;
+        var d = 'M0 5 Q8 ' + (5 - Math.sin(somOndaT) * amp).toFixed(2)
+              + ' 16 5 Q24 ' + (5 + Math.sin(somOndaT) * amp).toFixed(2) + ' 32 5';
+        if (somOndaPath) somOndaPath.setAttribute('d', d);
+        somOndaRaf = requestAnimationFrame(tick);
+      }
+      tick();
+    }
+    function pararOnda() {
+      if (somOndaRaf) { cancelAnimationFrame(somOndaRaf); somOndaRaf = null; }
+      if (somOndaPath) somOndaPath.setAttribute('d', 'M0 5 Q8 5 16 5 Q24 5 32 5');
+    }
+
+    function mostrarConvite() {
+      if (!somConvite || somEscolhido) return;
+      somConvite.classList.add('is-visible');
+    }
+
+    function esconderConvite() {
+      if (!somConvite) return;
+      somConvite.classList.remove('is-visible');
+      somConvite.classList.add('is-hiding');
+      setTimeout(function() {
+        somConvite.setAttribute('aria-hidden', 'true');
+        somConvite.style.display = 'none';
+      }, 700);
+    }
+
+    function ativarSom() {
+      if (somEscolhido) return;
+      somEscolhido = true;
+      somAtivo = true;
+      esconderConvite();
+      if (!audioMar) return;
+      audioMar.src = 'assets/audio/hero_sea.mp3';
+      audioMar.volume = 0;
+      audioMar.play().then(function() {
+        fadeVolume(audioMar, 0.72, 2.5, null);
+        if (somControle) {
+          somControle.hidden = false;
+          somControle.setAttribute('aria-label', 'silenciar o mar');
+        }
+        iniciarOnda();
+      }).catch(function() { somAtivo = false; });
+    }
+
+    function escolherSilencio() {
+      if (somEscolhido) return;
+      somEscolhido = true;
+      esconderConvite();
+    }
+
+    function toggleMute() {
+      if (!audioMar) return;
+      somMutado = !somMutado;
+      if (somMutado) {
+        fadeVolume(audioMar, 0, 1.2, function() { audioMar.pause(); });
+        pararOnda();
+        if (somControle) {
+          somControle.classList.add('is-muted');
+          somControle.setAttribute('aria-label', 'retomar o mar');
+        }
+      } else {
+        audioMar.play().then(function() {
+          fadeVolume(audioMar, 0.72, 1.2, null);
+          iniciarOnda();
+        }).catch(function() {});
+        if (somControle) {
+          somControle.classList.remove('is-muted');
+          somControle.setAttribute('aria-label', 'silenciar o mar');
+        }
+      }
+    }
+
+    if (btnOuvir) btnOuvir.addEventListener('click', ativarSom);
+    if (btnSilencio) btnSilencio.addEventListener('click', escolherSilencio);
+    if (somControle) somControle.addEventListener('click', toggleMute);
+
+    window.addEventListener('scroll', function() {
+      if (!somEscolhido && window.scrollY > 80) escolherSilencio();
+    }, { passive: true });
+
+    if (!saveData) setTimeout(mostrarConvite, 3000);
+
   </script>
 </body>
 </html>
