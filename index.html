@@ -715,7 +715,7 @@
       position: absolute;
       left: 1.75rem;
       right: 1.75rem;
-      top: 42%;
+      top: 45%;
       z-index: 3;
       max-width: 340px;
       opacity: 0;
@@ -737,10 +737,10 @@
       font-style: italic;
       font-size: clamp(0.9375rem, 2.4vw, 1.0625rem);
       line-height: 1.55;
-      color: rgba(246,239,229,0.82);
+      color: rgba(246,239,229,0.88);
       letter-spacing: 0.008em;
       margin-bottom: 1rem;
-      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+      text-shadow: 0 1px 2px rgba(16,20,23,0.62), 0 2px 18px rgba(16,20,23,0.68);
     }
     .hero__som-opcoes {
       display: flex;
@@ -756,9 +756,9 @@
       font-weight: 400;
       font-size: 0.8125rem;
       letter-spacing: 0.05em;
-      color: rgba(246,239,229,0.78);
+      color: rgba(246,239,229,0.84);
       transition: color 0.3s ease;
-      text-shadow: 0 1px 12px rgba(16,20,23,0.45);
+      text-shadow: 0 1px 2px rgba(16,20,23,0.62), 0 2px 18px rgba(16,20,23,0.68);
       min-height: 44px;
       min-width: 44px;
       display: flex;
@@ -783,8 +783,8 @@
       cursor: pointer;
       padding: 0.75rem;
       color: var(--vc-sal);
-      opacity: 0.65;
-      filter: drop-shadow(0 1px 4px rgba(16,20,23,0.5));
+      opacity: 0.6;
+      filter: drop-shadow(0 1px 5px rgba(16,20,23,0.65));
       transition: opacity 0.4s ease;
       -webkit-tap-highlight-color: transparent;
     }
@@ -794,6 +794,7 @@
       outline-offset: 4px;
       border-radius: 2px;
     }
+    .som-controle.is-idle { opacity: 0.45; }
     .som-controle.is-muted { opacity: 0.32; }
     .som-controle__svg {
       display: block;
@@ -802,7 +803,11 @@
       overflow: visible;
     }
     @media (min-width: 640px) {
-      .hero__som-convite { top: 55%; }
+      .hero__som-convite { top: 32%; }
+    }
+    /* telas baixas (ex.: iPhone SE): puxa a convite pra cima pra não encostar no headline */
+    @media (max-height: 700px) {
+      .hero__som-convite { top: 33%; }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero__som-convite,
@@ -877,7 +882,7 @@
       <div class="hero__img-placeholder" aria-hidden="true"></div>
       <video class="hero__video" id="hero-video"
         poster="assets/video/hero_poster.jpg"
-        muted loop playsinline autoplay
+        muted loop playsinline webkit-playsinline autoplay preload="auto"
         aria-hidden="true">
         <source src="assets/video/hero_loop.mp4" type="video/mp4">
       </video>
@@ -1118,8 +1123,8 @@
 
   </main>
 
-  <button class="som-controle" id="som-controle" type="button"
-    aria-label="silenciar o mar" hidden>
+  <button class="som-controle is-idle" id="som-controle" type="button"
+    aria-label="ouvir o mar">
     <svg class="som-controle__svg" viewBox="0 0 32 10" fill="none"
       xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path id="som-onda-path" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
@@ -1159,13 +1164,33 @@
     window.addEventListener('scroll', atualizarNav, { passive: true });
     atualizarNav();
 
-    // Vídeo hero: fallback estático no Save-Data ou reduced-motion
+    // Vídeo hero: fallback estático no Save-Data ou reduced-motion (decisão ÚNICA no load — nunca em resize/scroll)
     var heroVideo = document.getElementById('hero-video');
     var saveData = !!(navigator.connection && navigator.connection.saveData);
-    if (heroVideo && (saveData || prefersReducedMotion)) {
+    var heroFallback = saveData || prefersReducedMotion;
+    if (heroVideo && heroFallback) {
       heroVideo.querySelectorAll('source').forEach(function (s) { s.remove(); });
       heroVideo.load();
       heroVideo.pause();
+    }
+
+    // Rede de segurança: iOS às vezes pausa o autoplay; religa só quando o vídeo está visível e fora do fallback
+    if (heroVideo && !heroFallback) {
+      var heroVisivel = function () {
+        var r = heroVideo.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
+      };
+      var retomarHero = function () {
+        if (heroFallback || document.hidden || !heroVisivel()) return;
+        var p = heroVideo.play();
+        if (p && p.catch) p.catch(function () {});
+      };
+      heroVideo.addEventListener('ended', retomarHero);
+      heroVideo.addEventListener('pause', function () {
+        if (!document.hidden) retomarHero();
+      });
+      document.addEventListener('visibilitychange', retomarHero);
+      window.addEventListener('focus', retomarHero);
     }
 
     // Parallax hero
@@ -1290,9 +1315,11 @@
       if (somOndaPath) somOndaPath.setAttribute('d', 'M0 5 Q8 5 16 5 Q24 5 32 5');
     }
 
+    var conviteMostradoEm = 0;
     function mostrarConvite() {
       if (!somConvite || somEscolhido) return;
       somConvite.classList.add('is-visible');
+      conviteMostradoEm = Date.now();
     }
 
     function esconderConvite() {
@@ -1305,22 +1332,28 @@
       }, 700);
     }
 
-    function ativarSom() {
-      if (somEscolhido) return;
-      somEscolhido = true;
-      somAtivo = true;
-      esconderConvite();
-      if (!audioMar) return;
-      audioMar.src = 'assets/audio/hero_sea.mp3';
+    function iniciarMar() {
+      if (!audioMar || somAtivo) return;
+      if (!audioMar.src) audioMar.src = 'assets/audio/hero_sea.mp3';
       audioMar.volume = 0;
-      audioMar.play().then(function() {
-        fadeVolume(audioMar, 0.72, 2.5, null);
-        if (somControle) {
-          somControle.hidden = false;
-          somControle.setAttribute('aria-label', 'silenciar o mar');
-        }
-        iniciarOnda();
-      }).catch(function() { somAtivo = false; });
+      var p = audioMar.play();
+      if (p && p.then) {
+        p.then(function() {
+          somAtivo = true;
+          somMutado = false;
+          fadeVolume(audioMar, 0.72, 2.5, null);
+          if (somControle) {
+            somControle.classList.remove('is-idle', 'is-muted');
+            somControle.setAttribute('aria-label', 'silenciar o mar');
+          }
+          iniciarOnda();
+        }).catch(function() {});
+      }
+    }
+
+    function ativarSom() {
+      if (!somEscolhido) { somEscolhido = true; esconderConvite(); }
+      iniciarMar();
     }
 
     function escolherSilencio() {
@@ -1353,13 +1386,23 @@
 
     if (btnOuvir) btnOuvir.addEventListener('click', ativarSom);
     if (btnSilencio) btnSilencio.addEventListener('click', escolherSilencio);
-    if (somControle) somControle.addEventListener('click', toggleMute);
+    if (somControle) somControle.addEventListener('click', function() {
+      if (!somAtivo) ativarSom();   // caminho pro som sempre disponível, mesmo após o silêncio
+      else toggleMute();
+    });
 
+    // traço discreto desde o início — sempre há um caminho pro som
+    if (somOndaPath) somOndaPath.setAttribute('d', 'M0 5 Q8 5 16 5 Q24 5 32 5');
+
+    // convite NÃO some no primeiro scroll: só auto-dissolve ao passar ~85% do hero, e nunca antes de ~6s visível
     window.addEventListener('scroll', function() {
-      if (!somEscolhido && window.scrollY > 80) escolherSilencio();
+      if (somEscolhido) return;
+      var passouHero = window.scrollY > window.innerHeight * 0.85;
+      var visivelTempoMin = conviteMostradoEm && (Date.now() - conviteMostradoEm) >= 6000;
+      if (passouHero && visivelTempoMin) escolherSilencio();
     }, { passive: true });
 
-    if (!saveData) setTimeout(mostrarConvite, 3000);
+    if (!saveData) setTimeout(mostrarConvite, 1200);
 
   </script>
 </body>
