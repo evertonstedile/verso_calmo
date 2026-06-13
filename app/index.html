@@ -31,23 +31,26 @@
     <main class="telas" id="conteudo">
 
       <!-- ============ TELA 1 — RESPIRO DO DIA ============ -->
+      <!-- O trilho é preenchido por respiro.js (respiro do dia + acervo deslizável).
+           O <noscript> garante o respiro de hoje mesmo sem JS. -->
       <section class="tela tela--respiro is-ativa" data-tela="respiro" aria-label="respiro do dia">
-        <picture class="respiro__foto">
-          <source srcset="/assets/garopaba/01-hero-garopaba.avif" type="image/avif">
-          <source srcset="/assets/garopaba/01-hero-garopaba.webp" type="image/webp">
-          <img src="/assets/garopaba/01-hero-garopaba.jpg"
-               alt="entardecer dourado sobre o mar e a montanha em garopaba"
-               fetchpriority="high" decoding="async">
-        </picture>
-        <div class="respiro__gradiente"></div>
-        <div class="respiro__conteudo">
-          <p class="respiro__label">respiro do dia</p>
-          <!-- [Fase 2] frase e foto passam a vir de /app/data/respiros.json
-                       (respiro determinístico por data) + swipe do acervo
-                       + botões "guardar este respiro" e "presentear". -->
-          <p class="respiro__frase">a vida também acontece nos intervalos</p>
-          <p class="respiro__assinatura">garopaba · marina gomes</p>
-        </div>
+        <div class="respiro__trilho" id="respiro-trilho" aria-live="polite"></div>
+        <noscript>
+          <article class="respiro__slide">
+            <picture class="respiro__foto">
+              <source srcset="/assets/garopaba/01-hero-garopaba.avif" type="image/avif">
+              <source srcset="/assets/garopaba/01-hero-garopaba.webp" type="image/webp">
+              <img src="/assets/garopaba/01-hero-garopaba.jpg"
+                   alt="entardecer dourado sobre o mar e a montanha em garopaba">
+            </picture>
+            <div class="respiro__gradiente"></div>
+            <div class="respiro__conteudo">
+              <p class="respiro__label">respiro do dia</p>
+              <p class="respiro__frase">a vida também acontece nos intervalos</p>
+              <p class="respiro__assinatura">garopaba · marina gomes</p>
+            </div>
+          </article>
+        </noscript>
       </section>
 
       <!-- ============ TELA 2 — GUARDADOS ============ -->
