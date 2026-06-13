@@ -1,0 +1,244 @@
+/* ===========================================================
+   Verso Calmo — app PWA · estilos próprios do app
+   Cor SÓ via var(--vc-*) de /tokens.css. Translúcidos = rgba do HEX do token.
+   Tipografia: Fraunces (frases/títulos) + Manrope (UI/texto).
+   =========================================================== */
+
+/* === RESET === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === BASE === */
+:root {
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
+body {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  background: var(--vc-sal);
+  color: var(--vc-tinta-mar);
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  min-height: 100%;
+  overflow: hidden;              /* o scroll acontece por tela, não no body */
+  overscroll-behavior: none;
+}
+img, picture, video { display: block; max-width: 100%; }
+picture { display: contents; }
+a { color: inherit; text-decoration: none; }
+em { font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* === ACESSIBILIDADE === */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; top: -100%; left: 1rem; z-index: 9999;
+  padding: 0.625rem 1.25rem;
+  background: var(--vc-tinta-mar); color: var(--vc-sal);
+  font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 0.875rem;
+  border-radius: 0 0 4px 4px;
+}
+.skip-link:focus { top: 0; }
+:focus-visible { outline: 2px solid var(--vc-ambar-suave); outline-offset: 3px; border-radius: 2px; }
+
+/* === ESTRUTURA DO APP === */
+.app {
+  position: relative;
+  width: 100%;
+  height: 100vh; height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--vc-sal);
+  transition: background 0.6s ease;
+}
+.app[data-modo="profundidade"] { background: var(--vc-noite-mar); }
+
+.telas { position: relative; flex: 1 1 auto; min-height: 0; }
+
+/* Cada tela ocupa a área e rola por dentro; só a ativa aparece. */
+.tela {
+  position: absolute; inset: 0;
+  display: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tela.is-ativa { display: block; animation: telaEntra 0.5s ease both; }
+@keyframes telaEntra { from { opacity: 0; } to { opacity: 1; } }
+
+.tela--claro { padding: calc(var(--safe-t) + 3rem) 1.75rem 2rem; }
+
+/* === TELA 1 — RESPIRO DO DIA (full-bleed, Modo Profundidade) === */
+.tela--respiro { padding: 0; }
+.respiro__foto img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+  z-index: 0;
+}
+.respiro__gradiente {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(16,20,23,0.82) 0%,
+    rgba(16,20,23,0.42) 38%,
+    rgba(16,20,23,0.06) 70%,
+    rgba(16,20,23,0) 100%
+  );
+}
+.respiro__conteudo {
+  position: absolute;
+  left: 1.75rem; right: 1.75rem;
+  bottom: calc(var(--safe-t) + 2rem);
+  z-index: 2;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.respiro__label {
+  font-family: 'Manrope', sans-serif; font-weight: 500;
+  font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: lowercase;
+  color: rgba(246,239,229,0.55);
+}
+.respiro__frase {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: clamp(2rem, 8.5vw, 3.25rem); line-height: 1.08; letter-spacing: -0.01em;
+  color: var(--vc-sal); max-width: 18ch;
+}
+.respiro__assinatura {
+  font-family: 'Manrope', sans-serif; font-weight: 400;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(246,239,229,0.6);
+}
+
+/* === CABEÇALHO PADRÃO DAS TELAS CLARAS === */
+.tela__cabecalho { margin-bottom: 2rem; }
+.tela__label {
+  font-family: 'Manrope', sans-serif; font-weight: 500;
+  font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: lowercase;
+  color: var(--vc-tinta-mar-suave); opacity: 0.65;
+}
+.tela__titulo {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: clamp(1.875rem, 7vw, 2.75rem); line-height: 1.1; letter-spacing: -0.008em;
+  color: var(--vc-tinta-mar); margin-top: 0.5rem;
+}
+.tela__titulo em { color: var(--vc-ambar-suave); }
+
+/* === ESTADO VAZIO (com carinho) === */
+.vazio {
+  max-width: 32ch; margin: 16vh auto 0;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+}
+.vazio__frase {
+  font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+  font-size: clamp(1.5rem, 6vw, 2rem); line-height: 1.2;
+  color: var(--vc-tinta-mar);
+}
+.vazio__texto {
+  font-family: 'Manrope', sans-serif; font-weight: 400;
+  font-size: 0.9375rem; line-height: 1.75;
+  color: var(--vc-tinta-mar-suave);
+}
+
+/* === LOJA — CARTA EDITORIAL === */
+.carta { max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; }
+.carta__capa {
+  width: 100%; aspect-ratio: 4 / 5; max-height: 40vh;
+  border-radius: 4px; overflow: hidden;
+  background: linear-gradient(160deg, var(--vc-areia-clara) 0%, var(--vc-ambar-suave) 55%, var(--vc-areia-umida) 100%);
+}
+.carta__capa img { width: 100%; height: 100%; object-fit: cover; }
+.carta__corpo { padding: 1.75rem 0.25rem 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.carta__titulo {
+  font-family: 'Fraunces', serif; font-weight: 300;
+  font-size: 1.75rem; line-height: 1.1; color: var(--vc-tinta-mar);
+}
+.carta__texto {
+  font-family: 'Manrope', sans-serif; font-weight: 400;
+  font-size: 0.9375rem; line-height: 1.7; color: var(--vc-tinta-mar-suave); max-width: 40ch;
+}
+.carta__preco {
+  font-family: 'Manrope', sans-serif; font-weight: 500;
+  font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--vc-tinta-mar-suave);
+}
+
+/* === BOTÃO-GESTO (acento âmbar — único da seção) === */
+.gesto {
+  align-self: flex-start; margin-top: 0.5rem;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: 'Manrope', sans-serif; font-weight: 500;
+  font-size: 0.9375rem; letter-spacing: 0.02em; text-transform: lowercase;
+  color: var(--vc-ambar);
+  padding: 0.4rem 0; border-bottom: 1px solid var(--vc-ambar);
+  background: none; cursor: pointer;
+  transition: gap 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.gesto:hover { gap: 0.9rem; color: var(--vc-ambar-suave); border-color: var(--vc-ambar-suave); }
+.gesto__seta { transition: transform 0.3s ease; }
+.gesto:hover .gesto__seta { transform: translateX(3px); }
+
+/* === NAVEGAÇÃO INFERIOR === */
+.tabbar {
+  flex: 0 0 auto;
+  display: flex;
+  padding: 0.5rem 0.5rem calc(0.5rem + var(--safe-b));
+  border-top: 1px solid var(--vc-borda);
+  background: rgba(246,239,229,0.82);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  transition: background 0.6s ease, border-color 0.6s ease;
+  z-index: 50;
+}
+.app[data-modo="profundidade"] .tabbar {
+  background: rgba(16,20,23,0.55);
+  border-top-color: rgba(246,239,229,0.1);
+}
+.tabbar__item {
+  flex: 1 1 0;
+  display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  padding: 0.55rem 0.25rem;
+  color: var(--vc-tinta-mar-suave); opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+.app[data-modo="profundidade"] .tabbar__item { color: rgba(246,239,229,0.7); }
+.tabbar__item.is-ativa { opacity: 1; color: var(--vc-tinta-mar); }
+.app[data-modo="profundidade"] .tabbar__item.is-ativa { color: var(--vc-sal); }
+.tabbar__icone {
+  width: 22px; height: 22px;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+}
+.tabbar__rotulo {
+  position: relative;
+  font-family: 'Manrope', sans-serif; font-weight: 500;
+  font-size: 0.625rem; letter-spacing: 0.06em; text-transform: lowercase;
+}
+/* acento âmbar mínimo: um ponto sob a tela ativa */
+.tabbar__item.is-ativa .tabbar__rotulo::after {
+  content: ""; position: absolute; left: 50%; bottom: -0.4rem;
+  transform: translateX(-50%);
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--vc-ambar);
+}
+
+/* === DESKTOP — o app é mobile-first; em telas largas, centraliza num "celular" === */
+@media (min-width: 720px) {
+  .app {
+    max-width: 460px;
+    margin: 0 auto;
+    height: 100vh; height: 100svh;
+    border-left: 1px solid var(--vc-borda);
+    border-right: 1px solid var(--vc-borda);
+  }
+}

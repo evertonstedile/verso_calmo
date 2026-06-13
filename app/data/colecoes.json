@@ -1,0 +1,14 @@
+{
+  "colecoes": [
+    {
+      "id": "respiro-de-garopaba",
+      "titulo": "Respiro de Garopaba",
+      "carta": "cinco respiros de garopaba para a tela do seu dia.",
+      "capa": "/assets/em-breve/02-celular-wallpaper-real.jpg",
+      "preco": "R$17",
+      "qtd_wallpapers": 5,
+      "pagina": "/respiro-de-garopaba/",
+      "checkout_url": "#checkout-pendente"
+    }
+  ]
+}

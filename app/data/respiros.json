@@ -1,0 +1,24 @@
+{
+  "respiros": [
+    {
+      "id": "r-001",
+      "data": "2026-06-13",
+      "imagem": "/assets/garopaba/01-hero-garopaba.jpg",
+      "imagem_poster": "/assets/video/hero_poster.jpg",
+      "frase": "a vida também acontece nos intervalos",
+      "posicao_frase": "inferior",
+      "modo": "profundidade",
+      "alt": "entardecer dourado sobre o mar e a montanha em garopaba"
+    },
+    {
+      "id": "r-002",
+      "data": "2026-06-12",
+      "imagem": "/assets/video/hero_poster.jpg",
+      "imagem_poster": "/assets/video/hero_poster.jpg",
+      "frase": "o céu não precisa gritar para lembrar que existe",
+      "posicao_frase": "inferior",
+      "modo": "profundidade",
+      "alt": "céu amplo e calmo sobre o mar de garopaba"
+    }
+  ]
+}
