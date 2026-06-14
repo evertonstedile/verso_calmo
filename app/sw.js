@@ -1,14 +1,15 @@
 // sw.js — Service Worker do app Verso Calmo (PWA).
 //
 // Estratégia:
-//   • shell (HTML/CSS/JS/ícones/tokens) → cache-first: abre instantâneo e offline.
-//   • dados em /app/data/*.json          → network-first: sempre tenta o mais novo,
-//                                           cai pro cache se estiver offline.
-//   • demais GET do mesmo domínio (fotos) → cache-first preenchido sob demanda.
+//   • navegações (HTML)        → network-first: sempre o shell novo online,
+//                                cai pro cache offline (evita servir HTML velho).
+//   • dados em /app/data/*.json → network-first, cache de fallback.
+//   • demais GET (css/js/tokens/fotos) → stale-while-revalidate: serve do cache
+//                                na hora e atualiza em segundo plano.
 //
-// Versionar VERSAO invalida todo o cache a cada deploy do app.
+// Versionar VERSAO continua invalidando o cache a cada deploy do app.
 
-const VERSAO = 'vc-app-v6';
+const VERSAO = 'vc-app-v7';
 
 const SHELL = [
   './',
@@ -24,7 +25,10 @@ const SHELL = [
   './js/dados.js',
   './js/visor.js',
   './assets/icons/icon.svg',
-  './assets/icons/icon-maskable.svg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/icon-maskable-512.png',
+  './assets/icons/icon-180.png',
   '/tokens.css'
 ];
 
@@ -51,9 +55,17 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // Navegações → devolve o shell (SPA por hash).
+  // Navegações → network-first; offline cai pro shell em cache.
   if (req.mode === 'navigate') {
-    e.respondWith(caches.match('./index.html').then((r) => r || fetch(req)));
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          const copia = res.clone();
+          caches.open(VERSAO).then((c) => c.put('./index.html', copia));
+          return res;
+        })
+        .catch(() => caches.match('./index.html'))
+    );
     return;
   }
 
@@ -71,11 +83,11 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // Demais GET → cache-first, preenchendo sob demanda (só mesmo domínio e resposta boa).
+  // Demais GET (shell, tokens, fotos) → stale-while-revalidate:
+  // serve do cache na hora e atualiza em segundo plano (próximo load já vem novo).
   e.respondWith(
     caches.match(req).then((cacheado) => {
-      if (cacheado) return cacheado;
-      return fetch(req)
+      const rede = fetch(req)
         .then((res) => {
           if (res.ok && url.origin === location.origin) {
             const copia = res.clone();
@@ -84,6 +96,7 @@ self.addEventListener('fetch', (e) => {
           return res;
         })
         .catch(() => cacheado);
+      return cacheado || rede;
     })
   );
 });

@@ -23,7 +23,7 @@ DOMINIO = "https://versocalmo.com.br"
 GENERICO = {
     "id": "",
     "imagem": "/assets/garopaba/01-hero-garopaba.jpg",
-    "frase": "um respiro de garopaba.",
+    "frase": "a vida também acontece nos intervalos",
     "alt": "entardecer dourado sobre o mar e a montanha em garopaba",
     "og": "/assets/og/og-home.jpg",
 }

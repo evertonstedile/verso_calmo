@@ -5,7 +5,7 @@
 // cronológico reverso (ontem, anteontem…). Botões discretos: guardar e presentear.
 
 import * as cofre from './storage.js';
-import { carregarRespiros } from './dados.js';
+import { carregarRespiros, esc } from './dados.js';
 
 let respiros = null;   // cache do JSON (null = ainda não carregado)
 let trilho = null;     // elemento do carrossel
@@ -31,7 +31,9 @@ function render() {
   if (!trilho || !respiros || !respiros.length) return;
 
   const hoje = hojeISO();
-  const ordenados = [...respiros].sort((a, b) => (a.data < b.data ? 1 : a.data > b.data ? -1 : 0)); // data desc
+  const validos = respiros.filter((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.data)); // descarta entradas sem data ISO
+  if (!validos.length) return;
+  const ordenados = validos.sort((a, b) => (a.data < b.data ? 1 : a.data > b.data ? -1 : 0)); // data desc (ISO = lexical)
   let inicio = ordenados.findIndex((r) => r.data <= hoje);
   if (inicio === -1) inicio = 0; // todos no futuro → começa do mais recente
   const visiveis = ordenados.slice(inicio); // do dia para trás (cronológico reverso)
@@ -90,8 +92,7 @@ function acoes(r) {
   presentear.dataset.acao = 'presentear';
   presentear.textContent = 'presentear';
   presentear.addEventListener('click', () => {
-    // Pré-seleciona este respiro para a Tela 4.
-    // [Fase 5] presentear.js lê 'vc:presentear' e gera o link versocalmo.com.br/r/<id>.
+    // Pré-seleciona este respiro; presentear.js lê 'vc:presentear' e monta o link /r/<id>.
     try { sessionStorage.setItem('vc:presentear', r.id); } catch (_) {}
     location.hash = '#/presentear';
   });
@@ -124,9 +125,4 @@ function hojeISO() {
   const d = new Date();
   const z = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}`;
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }

@@ -3,7 +3,7 @@
 // em tela cheia (visor.js) para presentear ou remover.
 
 import * as cofre from './storage.js';
-import { carregarRespiros, porId } from './dados.js';
+import { carregarRespiros, porId, esc } from './dados.js';
 import { abrirVisor } from './visor.js';
 
 let secEl = null;
@@ -50,11 +50,6 @@ function card(r) {
     `<span class="guardado-card__frase">${esc(r.frase)}</span>`;
   btn.addEventListener('click', () => abrirVisor(r, { aoRemover: render }));
   return btn;
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 export default {

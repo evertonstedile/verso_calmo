@@ -3,10 +3,13 @@
 Segundo cômodo da mesma casa técnica do site: HTML/CSS/JS puro, sem build, deploy Vercel.
 Vive em `versocalmo.com.br/app/`. Herda `/tokens.css` e as fontes (Fraunces + Manrope) do site — sem duplicar.
 
-## Estado — Fase 1 (andaime)
-- Shell instalável (`manifest.webmanifest` + `sw.js`), navegação inferior discreta, **4 telas no padrão da marca**.
-- As telas estão montadas em HTML (rápidas, visíveis sem JS). O comportamento dinâmico entra nas próximas fases — ver os ganchos `// [Fase x]` em `/js`.
-- `js/storage.js` já é funcional (localStorage, lista de IDs) atrás de uma interface isolada.
+## Estado — v1 completa (4 telas)
+- **Shell + PWA**: `manifest.webmanifest` + `sw.js` (navegação network-first, dados network-first, demais assets stale-while-revalidate; cache versionado). Navegação inferior discreta, dual-mode Respiro/Profundidade.
+- **Tela 1 — Respiro do dia**: lê `data/respiros.json`, respiro determinístico por data, swipe do acervo, botões guardar/presentear.
+- **Tela 2 — Guardados**: grade editorial (storage.js), visor em tela cheia (presentear/remover) com foco gerenciado.
+- **Tela 3 — Loja**: cartas de `data/colecoes.json`, gesto "levar comigo" → checkout Kiwify (`checkout_url`) ou, enquanto pendente, a página `/respiro-de-garopaba/`.
+- **Tela 4 — Presentear**: respiro pré-selecionado + Web Share API gerando `versocalmo.com.br/r/<id>` (página servida pelo site, em `/r/`).
+- Camadas isoladas: `storage.js` (localStorage) e `dados.js` (loader + `esc`).
 
 ## Rodar local
 ```bash
@@ -17,13 +20,11 @@ python3 -m http.server 8080
 ```
 
 ## Pendências conhecidas
-- **Ícones PWA em PNG** (192 / 512 / maskable): hoje há só SVG em `assets/icons/`. Instala em Android/desktop; exportar PNG antes do lançamento melhora a fidelidade no iOS.
-- **Banco de respiros**: `data/respiros.json` traz só um seed (2 entradas reais). Empacotar 30–60 pares foto+frase (+ poster/LQIP).
-- **Kiwify**: `data/colecoes.json` usa `#checkout-pendente` (mesmo placeholder do site). Plugar a URL real quando existir — fonte única.
+- **Ícones PWA em PNG** (192 / 512 / maskable): hoje há SVG em `assets/icons/`. Exportar PNG melhora a instalação no iOS/Android.
+- **Banco de respiros**: `data/respiros.json` traz só um seed. Empacotar 30–60 pares foto+frase, com `imagem_poster` (LQIP) e os 3 formatos (avif/webp/jpg) para reativar o `<picture>` (gancho `// [Fase 7]` em `respiro.js`).
+- **Kiwify**: `data/colecoes.json` usa `#checkout-pendente`. Plugar a URL real quando existir.
+- **Presentes**: ao mudar o banco, rodar `python3 scripts/gerar-presentes.py` e recomitar `/r/`.
 
-## Próximas fases
-2. Respiro do dia (JSON determinístico por data + swipe + guardar/presentear)
-3. Guardados (storage.js → grade editorial)
-4. Loja (cartas de colecoes.json + checkout Kiwify)
-5. Presentear (Web Share API + rota `/r/<id>` no site)
-6. Performance / A11y / Offline · 7. Checklist de marca (doc 03 §13 + doc 16 §9)
+## Ganchos futuros
+`// [v2]` assinatura Respiro+, sync de guardados com login, acervo de clipes.
+`// [v3]` wallpaper vivo (hora→imagem), empacotamento nativo, push opcional.

@@ -6,7 +6,7 @@
 //
 // A página /r/<id> é servida pelo SITE (mesmo repo, rota nova) — etapa à parte.
 
-import { carregarRespiros, porId } from './dados.js';
+import { carregarRespiros, porId, esc } from './dados.js';
 
 const BASE_LINK = 'https://versocalmo.com.br/r/';
 let secEl = null;
@@ -64,27 +64,24 @@ function cartao(r) {
 
 async function compartilhar(r, link, wrap) {
   const fb = wrap.querySelector('[data-feedback]');
-  const dados = { title: 'um respiro de Garopaba', text: r.frase, url: link };
-  try {
-    if (navigator.share) {
-      await navigator.share(dados);
-    } else if (navigator.clipboard) {
-      await navigator.clipboard.writeText(link);
-      feedback(fb, 'link copiado — é só colar onde quiser.');
-    } else {
-      feedback(fb, link);
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'um respiro de Garopaba', text: r.frase, url: link });
+    } catch (_) {
+      // o usuário cancelou o compartilhamento nativo → silêncio
     }
+    return;
+  }
+  // sem Web Share: tenta copiar; se falhar (permissão/contexto inseguro), mostra o link cru
+  try {
+    await navigator.clipboard.writeText(link);
+    feedback(fb, 'link copiado — é só colar onde quiser.');
   } catch (_) {
-    // o usuário cancelou o compartilhamento nativo → silêncio
+    feedback(fb, link);
   }
 }
 
 function feedback(el, msg) { el.textContent = msg; el.hidden = false; }
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
 
 export default {
   modo: 'respiro',

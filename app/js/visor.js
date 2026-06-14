@@ -1,12 +1,18 @@
 // visor.js — abre um respiro em tela cheia (a partir de Guardados).
 // Ações: presentear, remover (re-renderiza via callback) e fechar (✕ / Esc).
+// Acessível: move o foco para dentro, prende o foco (trap), torna o fundo
+// inerte e devolve o foco à origem ao fechar.
 
 import * as cofre from './storage.js';
+import { esc } from './dados.js';
 
 let overlay = null;
+let origem = null;   // elemento que tinha o foco antes de abrir
+let inertes = [];    // conteúdo do app marcado inerte enquanto o visor existe
 
 export function abrirVisor(r, opcoes = {}) {
   fechar();
+  origem = document.activeElement;
 
   overlay = document.createElement('div');
   overlay.className = 'visor';
@@ -40,8 +46,13 @@ export function abrirVisor(r, opcoes = {}) {
   overlay.querySelector('.visor__fechar').addEventListener('click', fechar);
   document.addEventListener('keydown', onKey);
 
+  // Torna o resto do app inerte (sem foco/leitor) enquanto o visor está aberto.
   const app = document.querySelector('.app') || document.body;
-  app.appendChild(overlay);
+  inertes = [app.querySelector('.telas'), app.querySelector('.tabbar')].filter(Boolean);
+  inertes.forEach((el) => { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); });
+
+  app.appendChild(overlay);            // irmão de .telas/.tabbar → não herda o inert
+  overlay.querySelector('.visor__fechar').focus();
 }
 
 function fechar() {
@@ -49,10 +60,23 @@ function fechar() {
   overlay.remove();
   overlay = null;
   document.removeEventListener('keydown', onKey);
+  inertes.forEach((el) => { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); });
+  inertes = [];
+  if (origem && typeof origem.focus === 'function') origem.focus();
+  origem = null;
 }
 
 function onKey(e) {
-  if (e.key === 'Escape') fechar();
+  if (!overlay) return;
+  if (e.key === 'Escape') { fechar(); return; }
+  if (e.key === 'Tab') {
+    const focaveis = overlay.querySelectorAll('button');
+    if (!focaveis.length) return;
+    const primeiro = focaveis[0];
+    const ultimo = focaveis[focaveis.length - 1];
+    if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+    else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+  }
 }
 
 function botao(rotulo, onClick) {
@@ -62,9 +86,4 @@ function botao(rotulo, onClick) {
   b.textContent = rotulo;
   b.addEventListener('click', onClick);
   return b;
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }

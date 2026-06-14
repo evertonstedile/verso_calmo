@@ -3,7 +3,7 @@
 // Kiwify (checkout_url) quando a URL real existir; enquanto a Kiwify estiver
 // pendente (checkout_url começando com "#"), leva à página de venda do site.
 
-import { carregarColecoes } from './dados.js';
+import { carregarColecoes, esc } from './dados.js';
 
 let secEl = null;
 
@@ -40,11 +40,6 @@ function carta(c) {
       `</a>` +
     `</div>`;
   return art;
-}
-
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 export default {
