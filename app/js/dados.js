@@ -34,3 +34,8 @@ export function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+
+// Frase → HTML: escapa e transforma *palavra* na palavra-destaque em itálico.
+export function fraseHTML(s) {
+  return esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}

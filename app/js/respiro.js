@@ -5,7 +5,7 @@
 // cronológico reverso (ontem, anteontem…). Botões discretos: guardar e presentear.
 
 import * as cofre from './storage.js';
-import { carregarRespiros, esc } from './dados.js';
+import { carregarRespiros, esc, fraseHTML } from './dados.js';
 
 let respiros = null;   // cache do JSON (null = ainda não carregado)
 let trilho = null;     // elemento do carrossel
@@ -48,8 +48,7 @@ function slide(r, i) {
   art.className = 'respiro__slide';
   art.dataset.id = r.id;
 
-  // Apenas <img> por robustez: nem todo respiro tem avif/webp, e um <source>
-  // que dá 404 pode quebrar a imagem em alguns navegadores (Safari/iOS).
+  // Apenas <img> por robustez (nem todo respiro tem avif/webp).
   // [Fase 7] reintroduzir avif/webp via <picture> quando o banco garantir os 3 formatos.
   const pic = document.createElement('picture');
   pic.className = 'respiro__foto';
@@ -57,18 +56,24 @@ function slide(r, i) {
     `<img src="${esc(r.imagem)}" alt="${esc(r.alt || '')}" ` +
     `${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 
-  const grad = document.createElement('div');
-  grad.className = 'respiro__gradiente';
+  const veu = document.createElement('div');
+  veu.className = 'respiro__veu';
 
-  const cont = document.createElement('div');
-  cont.className = `respiro__conteudo respiro__conteudo--${r.posicao_frase || 'inferior'}`;
-  cont.innerHTML =
-    `<p class="respiro__label">${esc(rotuloDia(i, r.data))}</p>` +
-    `<p class="respiro__frase">${esc(r.frase)}</p>` +
-    `<p class="respiro__assinatura">garopaba · marina gomes</p>`;
+  const label = document.createElement('p');
+  label.className = 'respiro__label';
+  label.textContent = rotuloDia(i, r.data);
 
-  cont.appendChild(acoes(r));
-  art.append(pic, grad, cont);
+  // Frase pequena, centralizada, Fraunces, com a palavra-destaque em itálico (*palavra*).
+  const frase = document.createElement('p');
+  frase.className = 'respiro__frase';
+  frase.innerHTML = fraseHTML(r.frase);
+
+  const rodape = document.createElement('div');
+  rodape.className = 'respiro__rodape';
+  rodape.innerHTML = `<p class="respiro__assinatura">garopaba · marina gomes</p>`;
+  rodape.appendChild(acoes(r));
+
+  art.append(pic, veu, label, frase, rodape);
   return art;
 }
 

@@ -4,7 +4,7 @@
 // inerte e devolve o foco à origem ao fechar.
 
 import * as cofre from './storage.js';
-import { esc } from './dados.js';
+import { esc, fraseHTML } from './dados.js';
 
 let overlay = null;
 let origem = null;   // elemento que tinha o foco antes de abrir
@@ -22,9 +22,9 @@ export function abrirVisor(r, opcoes = {}) {
   overlay.innerHTML =
     `<button type="button" class="visor__fechar" aria-label="fechar">✕</button>` +
     `<picture class="respiro__foto"><img src="${esc(r.imagem)}" alt="${esc(r.alt || '')}" decoding="async"></picture>` +
-    `<div class="respiro__gradiente"></div>` +
-    `<div class="respiro__conteudo respiro__conteudo--${r.posicao_frase || 'inferior'}">` +
-      `<p class="respiro__frase">${esc(r.frase)}</p>` +
+    `<div class="respiro__veu"></div>` +
+    `<p class="respiro__frase">${fraseHTML(r.frase)}</p>` +
+    `<div class="respiro__rodape">` +
       `<p class="respiro__assinatura">garopaba · marina gomes</p>` +
       `<div class="respiro__acoes"></div>` +
     `</div>`;
