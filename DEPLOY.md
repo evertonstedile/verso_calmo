@@ -10,7 +10,7 @@ Documentação operacional para publicar o site no ar com domínio real.
 |------|-------|
 | **Domínio oficial** | `versocalmo.com.br` |
 | **URL canônica** | `https://versocalmo.com.br` |
-| **Branch de produção** | `claude/adoring-wright-VgQFf` |
+| **Branch de produção** | `main` |
 | **Repositório** | `evertonstedile/verso_calmo` |
 | **Plataforma de deploy** | Vercel (estático, sem build) |
 
@@ -23,7 +23,9 @@ Documentação operacional para publicar o site no ar com domínio real.
 | `index.html` | Home editorial |
 | `respiro-de-garopaba/index.html` | Página de venda do Respiro |
 | `em-breve/verso-calmo-preview4.html` | Página de pré-lançamento (transitória) |
-| `vercel.json` | Cache headers para Vercel |
+| `app/` | App PWA Verso Calmo (4 telas) — vive em `/app/` |
+| `r/<id>.html` | Páginas de presente (geradas por `scripts/gerar-presentes.py`) |
+| `vercel.json` | Cache headers + rewrite `/r/:id` para Vercel |
 | `robots.txt` | Indexação + referência ao sitemap |
 | `sitemap.xml` | Mapa de URLs indexáveis |
 | `favicon.svg` | Ícone da aba |
@@ -183,7 +185,7 @@ Testar nessa URL:
 
 ## Observações
 
-**Branch de produção:** `claude/adoring-wright-VgQFf` é a branch consolidada e oficial. Sempre fazer deploy dessa branch. Se a Vercel pedir para definir uma branch "principal", configurar como `claude/adoring-wright-VgQFf` por ora — ou abrir PR para `main` antes do deploy, conforme preferir.
+**Branch de produção:** `main`. A Vercel publica a `main` (confirmado: o `index.html` no ar bate byte a byte com `origin/main`; a antiga `claude/adoring-wright-VgQFf` foi descontinuada e não existe mais no remoto). Sempre fazer merge/deploy para `main`.
 
 **Página em-breve:** `em-breve/verso-calmo-preview4.html` não está no sitemap e não tem canonical. Continuará acessível pela URL direta mas não será indexada pelos buscadores. Pode ser removida do rodapé da Home quando o site estiver no ar.
 
