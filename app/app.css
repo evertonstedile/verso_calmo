@@ -222,7 +222,7 @@ em { font-style: italic; }
 .tela__label {
   font-family: 'Manrope', sans-serif; font-weight: 500;
   font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: lowercase;
-  color: var(--vc-tinta-mar-suave); opacity: 0.65;
+  color: var(--vc-tinta-mar-suave);   /* contraste 5.68:1 (sem opacity, antes 2.76) */
 }
 .tela__titulo {
   font-family: 'Fraunces', serif; font-weight: 300;
@@ -302,13 +302,13 @@ em { font-style: italic; }
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-family: 'Manrope', sans-serif; font-weight: 500;
   font-size: 0.9375rem; letter-spacing: 0.02em; text-transform: lowercase;
-  color: var(--vc-ambar);
+  color: var(--vc-tinta-mar);   /* texto AA 11.99:1; o âmbar fica na seta + sublinhado */
   padding: 0.4rem 0; border: 0; border-bottom: 1px solid var(--vc-ambar);
   background: none; cursor: pointer;
-  transition: gap 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: gap 0.3s ease, border-color 0.3s ease;
 }
-.gesto:hover { gap: 0.9rem; color: var(--vc-ambar-suave); border-color: var(--vc-ambar-suave); }
-.gesto__seta { transition: transform 0.3s ease; }
+.gesto:hover { gap: 0.9rem; border-color: var(--vc-ambar-suave); }
+.gesto__seta { color: var(--vc-ambar); transition: transform 0.3s ease; }
 .gesto:hover .gesto__seta { transform: translateX(3px); }
 
 /* === NAVEGAÇÃO INFERIOR === */
@@ -330,11 +330,11 @@ em { font-style: italic; }
   flex: 1 1 0;
   display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
   padding: 0.55rem 0.25rem;
-  color: var(--vc-tinta-mar-suave); opacity: 0.6;
-  transition: opacity 0.3s ease, color 0.3s ease;
+  color: var(--vc-tinta-mar-suave);   /* inativo 5.68:1 (sem opacity, antes 2.52) */
+  transition: color 0.3s ease;
 }
-.app[data-modo="profundidade"] .tabbar__item { color: rgba(246,239,229,0.7); }
-.tabbar__item.is-ativa { opacity: 1; color: var(--vc-tinta-mar); }
+.app[data-modo="profundidade"] .tabbar__item { color: rgba(246,239,229,0.78); }
+.tabbar__item.is-ativa { color: var(--vc-tinta-mar); }
 .app[data-modo="profundidade"] .tabbar__item.is-ativa { color: var(--vc-sal); }
 .tabbar__icone {
   width: 22px; height: 22px;
