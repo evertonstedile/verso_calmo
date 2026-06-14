@@ -6,6 +6,7 @@
 
 /* === RESET === */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 /* === BASE === */
 :root {
@@ -156,6 +157,30 @@ em { font-style: italic; }
 .respiro__acao:hover { color: var(--vc-sal); border-color: rgba(246,239,229,0.7); }
 .respiro__acao[data-guardado="true"] { color: var(--vc-ambar-suave); border-color: var(--vc-ambar-suave); }
 
+/* === VISOR — respiro em tela cheia (aberto a partir de Guardados) === */
+.visor {
+  position: absolute; inset: 0; z-index: 200;
+  background: var(--vc-noite-mar);
+  overflow: hidden; isolation: isolate;
+  animation: telaEntra 0.4s ease both;
+}
+.visor .respiro__foto img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%; z-index: 0;
+}
+.visor .respiro__conteudo { bottom: calc(var(--safe-b) + 2.25rem); }
+.visor__fechar {
+  position: absolute; top: calc(var(--safe-t) + 1rem); right: 1.25rem; z-index: 3;
+  width: 2.25rem; height: 2.25rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(16,20,23,0.35); color: var(--vc-sal);
+  border: 1px solid rgba(246,239,229,0.25); cursor: pointer;
+  font-size: 0.85rem; line-height: 1;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s ease;
+}
+.visor__fechar:hover { background: rgba(16,20,23,0.6); }
+
 /* === CABEÇALHO PADRÃO DAS TELAS CLARAS === */
 .tela__cabecalho { margin-bottom: 2rem; }
 .tela__label {
@@ -185,6 +210,31 @@ em { font-style: italic; }
   font-family: 'Manrope', sans-serif; font-weight: 400;
   font-size: 0.9375rem; line-height: 1.75;
   color: var(--vc-tinta-mar-suave);
+}
+
+/* === GUARDADOS — grade editorial === */
+.guardados__grade {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem 1rem;          /* espaço negativo generoso entre cards */
+}
+.guardado-card {
+  display: flex; flex-direction: column; gap: 0.65rem;
+  background: none; border: none; padding: 0; cursor: pointer; text-align: left;
+}
+.guardado-card__foto {
+  display: block; width: 100%; aspect-ratio: 4 / 5;
+  border-radius: 4px; overflow: hidden;
+  background: var(--vc-areia-clara);
+}
+.guardado-card__foto img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.guardado-card:hover .guardado-card__foto img { transform: scale(1.03); }
+.guardado-card__frase {
+  font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+  font-size: 0.9375rem; line-height: 1.3; color: var(--vc-tinta-mar);
 }
 
 /* === LOJA — CARTA EDITORIAL === */

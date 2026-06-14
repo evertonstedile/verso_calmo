@@ -5,6 +5,7 @@
 // cronológico reverso (ontem, anteontem…). Botões discretos: guardar e presentear.
 
 import * as cofre from './storage.js';
+import { carregarRespiros } from './dados.js';
 
 let respiros = null;   // cache do JSON (null = ainda não carregado)
 let trilho = null;     // elemento do carrossel
@@ -15,13 +16,7 @@ export default {
   async montar(sec) {
     trilho = sec.querySelector('#respiro-trilho');
     if (!trilho) return;
-    try {
-      const resp = await fetch('data/respiros.json', { cache: 'no-cache' });
-      const dados = await resp.json();
-      respiros = Array.isArray(dados.respiros) ? dados.respiros : [];
-    } catch (_) {
-      respiros = []; // offline e sem cache → tela fica no fallback do <noscript>
-    }
+    respiros = await carregarRespiros(); // [] se offline e sem cache → fica no <noscript>
     render();
   },
 
