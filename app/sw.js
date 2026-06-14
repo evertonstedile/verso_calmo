@@ -8,7 +8,7 @@
 //
 // Versionar VERSAO invalida todo o cache a cada deploy do app.
 
-const VERSAO = 'vc-app-v4';
+const VERSAO = 'vc-app-v5';
 
 const SHELL = [
   './',
