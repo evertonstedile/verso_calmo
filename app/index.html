@@ -73,26 +73,28 @@
           <p class="tela__label">loja</p>
           <h1 class="tela__titulo">para <em>levar com você</em></h1>
         </header>
-        <!-- [Fase 4] as cartas passam a ser renderizadas de /app/data/colecoes.json
-                     e o gesto vai direto ao checkout Kiwify quando a URL existir. -->
-        <article class="carta">
-          <div class="carta__capa">
-            <picture>
-              <source srcset="/assets/em-breve/02-celular-wallpaper-real.avif" type="image/avif">
-              <source srcset="/assets/em-breve/02-celular-wallpaper-real.webp" type="image/webp">
-              <img src="/assets/em-breve/02-celular-wallpaper-real.jpg"
-                   alt="celular sobre a areia com um wallpaper de garopaba na tela" loading="lazy" decoding="async">
-            </picture>
-          </div>
-          <div class="carta__corpo">
-            <h2 class="carta__titulo">Respiro de Garopaba</h2>
-            <p class="carta__texto">cinco respiros de garopaba para a tela do seu dia.</p>
-            <p class="carta__preco">R$17 · 5 wallpapers</p>
-            <a class="gesto" href="/respiro-de-garopaba/">
-              levar comigo <span class="gesto__seta" aria-hidden="true">→</span>
-            </a>
-          </div>
-        </article>
+        <!-- loja.js renderiza as cartas de /app/data/colecoes.json. -->
+        <div class="loja__cartas" data-cartas></div>
+        <noscript>
+          <article class="carta">
+            <div class="carta__capa">
+              <picture>
+                <source srcset="/assets/em-breve/02-celular-wallpaper-real.avif" type="image/avif">
+                <source srcset="/assets/em-breve/02-celular-wallpaper-real.webp" type="image/webp">
+                <img src="/assets/em-breve/02-celular-wallpaper-real.jpg"
+                     alt="celular sobre a areia com um wallpaper de garopaba na tela" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="carta__corpo">
+              <h2 class="carta__titulo">Respiro de Garopaba</h2>
+              <p class="carta__texto">cinco respiros de garopaba para a tela do seu dia.</p>
+              <p class="carta__preco">R$17 · 5 wallpapers</p>
+              <a class="gesto" href="/respiro-de-garopaba/">
+                levar comigo <span class="gesto__seta" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </noscript>
       </section>
 
       <!-- ============ TELA 4 — PRESENTEAR ============ -->

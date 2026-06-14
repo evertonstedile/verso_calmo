@@ -238,7 +238,8 @@ em { font-style: italic; }
 }
 
 /* === LOJA — CARTA EDITORIAL === */
-.carta { max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; }
+.loja__cartas { display: flex; flex-direction: column; gap: 3.5rem; }
+.carta { max-width: 380px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; }
 .carta__capa {
   width: 100%; aspect-ratio: 4 / 5; max-height: 40vh;
   border-radius: 4px; overflow: hidden;
