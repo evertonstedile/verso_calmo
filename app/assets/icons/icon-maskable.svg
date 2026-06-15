@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="verso calmo">
-  <!-- Maskable: fundo sangra até a borda; o monograma vive na zona segura central (~60%). -->
+  <!-- Maskable: fundo sangra até a borda; o selo V|C na zona segura central. -->
   <rect width="512" height="512" fill="#F6EFE5"/>
-  <text x="50%" y="50%" dy="0.34em" text-anchor="middle"
-        font-family="Georgia, 'Times New Roman', serif" font-size="208"
-        font-style="italic" font-weight="300" fill="#3A2A22">vc</text>
+  <g fill="#3A2A22" font-family="'Times New Roman', Georgia, serif" font-weight="400" font-size="150" text-anchor="middle">
+    <text x="190" y="50%" dy="0.34em">V</text>
+    <text x="322" y="50%" dy="0.34em">C</text>
+  </g>
+  <line x1="256" y1="199" x2="256" y2="313" stroke="#3A2A22" stroke-width="2.5" opacity="0.45"/>
 </svg>
