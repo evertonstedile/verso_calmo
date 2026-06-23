@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lista de interesse — verso calmo</title>
+  <meta name="description" content="entra na lista e sabe quando a coleção Respiro de Garopaba abrir.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      color: var(--vc-sal);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.75rem;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('../assets/garopaba/01-hero-garopaba.webp');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 20, 23, 0.76);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      z-index: -1;
+    }
+
+    .lista-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .lista-titulo {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      line-height: 1.35;
+      color: var(--vc-areia-umida);
+      margin-bottom: 1.25rem;
+    }
+
+    .lista-desc {
+      font-size: clamp(0.9375rem, 2.5vw, 1rem);
+      line-height: 1.75;
+      color: var(--vc-tinta-mar-suave);
+      margin-bottom: 2.5rem;
+    }
+
+    .lista-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .lista-form input[type="email"] {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(246, 239, 229, 0.22);
+      color: var(--vc-sal);
+      font-family: 'Manrope', sans-serif;
+      font-size: 1rem;
+      padding: 0.8125rem 0;
+      text-align: center;
+      outline: none;
+      transition: border-color 200ms ease;
+    }
+
+    .lista-form input[type="email"]::placeholder {
+      color: rgba(246, 239, 229, 0.38);
+    }
+
+    .lista-form input[type="email"]:focus {
+      border-color: var(--vc-areia-umida);
+    }
+
+    .lista-form button {
+      margin-top: 0.5rem;
+      width: 100%;
+      background: var(--vc-areia-umida);
+      color: var(--vc-tinta-mar);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      border: none;
+      padding: 0.9375rem 2rem;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 200ms ease;
+    }
+
+    .lista-form button:hover {
+      background: var(--vc-ambar-suave);
+    }
+
+    .lista-disclaimer {
+      margin-top: 1.5rem;
+      font-size: 0.8125rem;
+      color: rgba(246, 239, 229, 0.3);
+      line-height: 1.5;
+    }
+
+    .lista-voltar {
+      display: block;
+      margin-top: 3rem;
+      font-size: 0.8125rem;
+      color: rgba(246, 239, 229, 0.28);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 200ms ease;
+    }
+
+    .lista-voltar:hover { color: rgba(246, 239, 229, 0.55); }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="lista-inner">
+    <h1 class="lista-titulo"><em>a coleção completa<br>vem em breve</em></h1>
+    <p class="lista-desc">
+      cinco paisagens de Garopaba<br>
+      pra levar na tela do celular.<br><br>
+      deixa teu e-mail que eu te aviso,<br>
+      <em>com calma</em>, quando ela abrir.
+    </p>
+
+    <form class="lista-form" id="lista-form"
+          action="https://app.kit.com/forms/9601037/subscriptions"
+          method="post" novalidate>
+      <label for="email-lista" class="sr-only">seu melhor e-mail</label>
+      <input id="email-lista" type="email" name="email_address"
+             placeholder="seu melhor e-mail" required autocomplete="email">
+      <button type="submit">quero saber quando abrir</button>
+    </form>
+
+    <p class="lista-disclaimer">sem spam. você sai quando quiser.</p>
+    <a class="lista-voltar" href="/">← verso calmo</a>
+  </div>
+
+  <script>
+    document.getElementById('lista-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = this;
+      var data = new FormData(form);
+      fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' })
+        .then(function() { window.location.href = '/obrigado/'; })
+        .catch(function() { window.location.href = '/obrigado/'; });
+    });
+  </script>
+</body>
+</html>

@@ -29,11 +29,6 @@
       text-align: center;
     }
 
-    .obrigado__onda {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
     .obrigado__titulo {
       font-family: 'Fraunces', serif;
       font-weight: 300;
@@ -72,16 +67,23 @@
       color: var(--vc-areia-umida);
       border-color: var(--vc-areia-umida);
     }
+
+    .obrigado__insta {
+      color: var(--vc-areia-umida);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200, 167, 125, 0.35);
+      transition: border-color 200ms ease;
+    }
+    .obrigado__insta:hover { border-color: var(--vc-areia-umida); }
   </style>
 </head>
 <body>
-  <div class="obrigado__onda" aria-hidden="true">🌊</div>
   <h1 class="obrigado__titulo">teu lugar está guardado.</h1>
   <p class="obrigado__corpo">
     quando o <strong>Respiro de Garopaba</strong> abrir,
     você é uma das primeiras a saber.<br><br>
     enquanto isso, tem um respiro novo todo dia
-    no <strong>@versocalmo</strong>.
+    no <a href="https://www.instagram.com/versocalmo" target="_blank" rel="noopener noreferrer" class="obrigado__insta">@versocalmo</a>.
   </p>
   <a class="obrigado__link" href="/">voltar para o início</a>
 </body>
