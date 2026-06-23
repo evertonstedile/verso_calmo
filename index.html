@@ -925,10 +925,77 @@
       .cta-lista { padding: 4rem 1.5rem; }
     }
   
+    /* form inline do Kit: garante render igual a /lista */
+    .formkit-form[data-uid="2921b87d9a"] {
+      display: block !important;
+      max-width: 100% !important;
+      box-shadow: none !important;
+    }
+
+    /* === POPUP proprio (overlay que eu controlo) === */
+    .vc-popup {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0.75rem;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .35s ease;
+    }
+    .vc-popup.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+    .vc-popup__backdrop {
+      position: absolute; inset: 0;
+      background: rgba(16,20,23,0.6);
+      -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    }
+    .vc-popup__card { position: relative; z-index: 1; width: 100%; max-width: 700px; }
+    .vc-popup__close {
+      position: absolute; top: 1rem; right: 1rem; z-index: 2;
+      width: 2.5rem; height: 2.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; line-height: 1;
+      color: var(--vc-sal);
+      background: rgba(16,20,23,0.45);
+      border: none; border-radius: 50%;
+      cursor: pointer;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      transition: background .2s ease;
+    }
+    .vc-popup__close:hover { background: rgba(16,20,23,0.7); }
+
+    /* Desktop: forca as 2 colunas do Kit dentro do popup
+       (no modal o Kit nao mede a largura certo e perde o grid nativo) */
+    @media (min-width: 640px) {
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] [data-style="full"] {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        align-items: stretch !important;
+      }
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-background {
+        min-height: 100% !important;
+        height: 100% !important;
+        background-size: cover !important;
+        background-position: center !important;
+      }
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-column {
+        padding: 40px !important;
+      }
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-fields {
+        display: block !important;
+        width: 100% !important;
+      }
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-field {
+        width: 100% !important;
+        margin: 0 0 12px 0 !important;
+      }
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-input,
+      .vc-popup .formkit-form[data-uid="2921b87d9a"] .formkit-submit {
+        width: 100% !important;
+      }
+    }
+
     /* texto curto aparece so no mobile; desktop usa o completo */
     .formkit-form[data-uid="2921b87d9a"] .kit-short { display: none; }
 
-    /* === KIT POPUP — MOBILE: card horizontal (imagem | form) === */
+    /* === POPUP — MOBILE: card horizontal (imagem | form) === */
     @media (max-width: 639px) {
       /* alterna texto: esconde o completo, mostra o curto */
       .formkit-form[data-uid="2921b87d9a"] .kit-full { display: none !important; }
@@ -950,7 +1017,7 @@
       }
 
       .formkit-form[data-uid="2921b87d9a"] .formkit-column {
-        padding: 2.75rem 1rem 1.1rem !important;
+        padding: 1.1rem 1rem !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
@@ -1604,9 +1671,33 @@
     if (!saveData) setTimeout(mostrarModal, 2000);
 
   </script>
-  <!-- Kit popup — dispara por scroll, gerenciado pelo ck.5.js -->
+  <!-- Popup de captura: form INLINE do Kit (igual /lista) dentro de modal proprio -->
   <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-  <form action="https://app.kit.com/forms/9601037/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9601037" data-uid="2921b87d9a" data-format="modal" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;pronto 🌊 teu lugar está guardado. quando o Respiro de Garopaba abrir, você é uma das primeiras.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;scroll&quot;,&quot;scroll_percentage&quot;:&quot;7&quot;,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:&quot;3&quot;},&quot;powered_by&quot;:{&quot;show&quot;:false,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800" style="background-color: rgb(142, 95, 67); border-radius: 8px;"><div data-style="full"><div data-element="column" class="formkit-background" style="background-image: url(&quot;https://embed.filekitcdn.com/e/vvA43hGfqrHpv4t4FE1ZwJ/xbrR5YKZt6bKvWZy8nczjw&quot;);"></div><div data-element="column" class="formkit-column"><div class="formkit-header" data-element="header" style="color: rgb(244, 239, 230); font-size: 10px; font-weight: 400;"><h2><span class="kit-full"><em>a coleção completa vem </em><strong>em breve</strong><em><br><br>cinco paisagens de Garopaba pra levar na tela do celular. <br><br>deixa teu e-mail que eu te aviso, </em>com calma<em>, quando ela abrir — </em><strong><em>sem spam.</em></strong></span><span class="kit-short"><em>a coleção vem </em><strong>em breve</strong><em>.<br><br>deixa teu e-mail que eu te aviso, </em>com calma<em> — </em><strong><em>sem spam.</em></strong></span></h2></div><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="               seu melhor e-mail" placeholder="               seu melhor e-mail" required="" type="email" style="color: rgb(139, 139, 139); border-color: rgb(221, 224, 228); font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(75, 53, 40); background-color: rgb(201, 170, 122); border-radius: 3px; font-weight: 700;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">quero saber quando abrir</span></button></div><div class="formkit-disclaimer" data-element="disclaimer" style="color: rgb(139, 131, 120); font-size: 13px;"><p>seu e-mail fica <span style="color:#4b3528"><em>só comigo</em></span><span style="color:#4b3528">. </span><span style="color:#4b3528"><em>sem spam</em></span>, e você sai <em>quando quiser</em>.</p></div></div></div></form>
+  <div id="vc-popup" class="vc-popup" aria-hidden="true">
+    <div class="vc-popup__backdrop" data-close></div>
+    <button class="vc-popup__close" type="button" data-close aria-label="fechar">&times;</button>
+    <div class="vc-popup__card">
+      <form action="https://app.kit.com/forms/9601037/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9601037" data-uid="2921b87d9a" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;pronto 🌊 teu lugar está guardado. quando o Respiro de Garopaba abrir, você é uma das primeiras.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;scroll&quot;,&quot;scroll_percentage&quot;:&quot;7&quot;,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:&quot;3&quot;},&quot;powered_by&quot;:{&quot;show&quot;:false,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800" style="background-color: rgb(142, 95, 67); border-radius: 8px;"><div data-style="full"><div data-element="column" class="formkit-background" style="background-image: url(&quot;https://embed.filekitcdn.com/e/vvA43hGfqrHpv4t4FE1ZwJ/xbrR5YKZt6bKvWZy8nczjw&quot;);"></div><div data-element="column" class="formkit-column"><div class="formkit-header" data-element="header" style="color: rgb(244, 239, 230); font-size: 10px; font-weight: 400;"><h2><span class="kit-full"><em>a coleção completa vem </em><strong>em breve</strong><em><br><br>cinco paisagens de Garopaba pra levar na tela do celular. <br><br>deixa teu e-mail que eu te aviso, </em>com calma<em>, quando ela abrir — </em><strong><em>sem spam.</em></strong></span><span class="kit-short"><em>a coleção vem </em><strong>em breve</strong><em>.<br><br>deixa teu e-mail que eu te aviso, </em>com calma<em> — </em><strong><em>sem spam.</em></strong></span></h2></div><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="               seu melhor e-mail" placeholder="               seu melhor e-mail" required="" type="email" style="color: rgb(139, 139, 139); border-color: rgb(221, 224, 228); font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(75, 53, 40); background-color: rgb(201, 170, 122); border-radius: 3px; font-weight: 700;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">quero saber quando abrir</span></button></div><div class="formkit-disclaimer" data-element="disclaimer" style="color: rgb(139, 131, 120); font-size: 13px;"><p>seu e-mail fica <span style="color:#4b3528"><em>só comigo</em></span><span style="color:#4b3528">. </span><span style="color:#4b3528"><em>sem spam</em></span>, e você sai <em>quando quiser</em>.</p></div></div></div></form>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var popup = document.getElementById("vc-popup");
+      if(!popup) return;
+      var KEY="vc_popup_seen", JANELA=3*24*60*60*1000; // reaparece a cada 3 dias
+      var last=0; try{ last=parseInt(localStorage.getItem(KEY)||"0",10)||0; }catch(e){}
+      var visto=(Date.now()-last)<JANELA;
+      function abrir(){ if(visto) return; popup.classList.add("is-open"); popup.setAttribute("aria-hidden","false"); visto=true; try{localStorage.setItem(KEY,String(Date.now()));}catch(e){} }
+      function fechar(){ popup.classList.remove("is-open"); popup.setAttribute("aria-hidden","true"); }
+      var alvos = popup.querySelectorAll("[data-close]");
+      for(var i=0;i<alvos.length;i++){ alvos[i].addEventListener("click", fechar); }
+      document.addEventListener("keydown", function(e){ if((e.key==="Escape"||e.key==="Esc") && popup.classList.contains("is-open")) fechar(); });
+      if(!visto){
+        var aoRolar=function(){ if(window.scrollY > window.innerHeight*0.7){ abrir(); window.removeEventListener("scroll", aoRolar); } };
+        window.addEventListener("scroll", aoRolar, {passive:true});
+      }
+    })();
+  </script>
 
 </body>
 </html>
