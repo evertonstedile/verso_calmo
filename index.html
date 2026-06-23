@@ -932,6 +932,22 @@
       box-shadow: none !important;
     }
 
+    /* Tipografia: Fraunces no titulo, Manrope no campo/botao (igual /lista) */
+    .formkit-form[data-uid="2921b87d9a"] .formkit-header {
+      font-size: 1rem !important;
+    }
+    .formkit-form[data-uid="2921b87d9a"] .formkit-header h2 {
+      font-family: 'Fraunces', serif !important;
+      font-weight: 300 !important;
+      font-size: clamp(1.25rem, 4vw, 1.75rem) !important;
+      line-height: 1.45 !important;
+      margin: 0 0 1.5rem !important;
+    }
+    .formkit-form[data-uid="2921b87d9a"] .formkit-input,
+    .formkit-form[data-uid="2921b87d9a"] .formkit-submit span {
+      font-family: 'Manrope', sans-serif !important;
+    }
+
     /* === POPUP proprio (overlay que eu controlo) === */
     .vc-popup {
       position: fixed; inset: 0; z-index: 9999;
@@ -1257,14 +1273,6 @@
     </section>
     --> <!-- fim do ACERVO oculto -->
 
-    <!-- CTA LISTA DE INTERESSE -->
-    <section class="cta-lista" aria-label="lista de interesse">
-      <div class="cta-lista__inner">
-        <p class="cta-lista__texto"><em>a coleção completa vem em breve</em></p>
-        <a href="/lista/" class="cta-lista__btn">quero saber quando abrir</a>
-      </div>
-    </section>
-
     <div class="luz luz--entardecer" aria-hidden="true"></div>
 
     <!-- 6. RESPIRO DE GAROPABA — ponte para o produto -->
@@ -1305,6 +1313,14 @@
             <img src="assets/wallpapers/wallpaper-05.jpg" alt="" loading="lazy" decoding="async" onerror="this.style.display='none'">
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA LISTA DE INTERESSE — logo após o respiro de garopaba -->
+    <section class="cta-lista" aria-label="lista de interesse">
+      <div class="cta-lista__inner">
+        <p class="cta-lista__texto"><em>a coleção completa vem em breve</em></p>
+        <a href="/lista/" class="cta-lista__btn">quero saber quando abrir</a>
       </div>
     </section>
 
