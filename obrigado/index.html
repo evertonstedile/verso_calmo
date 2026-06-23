@@ -18,7 +18,6 @@
 
     body {
       font-family: 'Manrope', sans-serif;
-      background: var(--vc-noite-mar);
       color: var(--vc-sal);
       min-height: 100vh;
       display: flex;
@@ -27,6 +26,28 @@
       justify-content: center;
       padding: 3rem 1.75rem;
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url('../assets/garopaba/01-hero-garopaba.webp');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 20, 23, 0.80);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: -1;
     }
 
     .obrigado__titulo {
